@@ -3,6 +3,8 @@ import { HandlerEvent } from '@netlify/functions';
 
 const API_ENDPOINT = 'https://pupperly-api.hasura.app/v1/graphql'
 
+console.log('process.env', process.env)
+
 exports.handler = async (event: HandlerEvent) => {
   let query = {
     query: `
@@ -17,13 +19,15 @@ exports.handler = async (event: HandlerEvent) => {
   const result = await axios({
     url: API_ENDPOINT,
     method: 'POST',
-    data: query
-  })
+    data: query,
+    headers: {
+      'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`
+    }
+  }) 
 
-  console.log(result);
+  console.log(result.data)
 
   return {
     statusCode: 200,
-    body: JSON.stringify('hello')
   }
 }

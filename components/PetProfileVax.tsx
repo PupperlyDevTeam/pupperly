@@ -1,11 +1,13 @@
 //this component need to conditionally render based on species.
-
+import { Avatar, Card, Typography, Box, Stack } from "@mui/material"
 
 const PetProfileVax = () => {
   return (
-    <div>
-      <h2>this is the component for pet vaccination </h2>
-    </div>
+    <Card>
+        
+      <Typography>this is for vaccines</Typography>
+    
+      </Card>
   )
 }
 

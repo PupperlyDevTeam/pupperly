@@ -1,8 +1,15 @@
+import { Avatar, Card, Typography, Box, Stack, Container } from "@mui/material"
+
 const PetProfileMed = () => {
   return (
-    <div>
-      <h2>this is the component for pet medication </h2>
-    </div>
+    <Container>
+      <Typography>Medications</Typography>
+      <Stack spacing={2} sx={{p:2}}>
+        <Typography>Diet:</Typography>
+        <Typography>Preventatives:</Typography>
+        <Typography>Vitamins and Supplements:</Typography>
+      </Stack>
+    </Container>
   )
 }
 

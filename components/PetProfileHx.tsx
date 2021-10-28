@@ -1,8 +1,13 @@
+import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper } from "@mui/material"
+
 const PetProfileHx = () => {
   return (
-    <div>
-      <h2>this is the component for pet medical history </h2>
-    </div>
+    <Container>
+      <Typography>Major Medication History</Typography>
+      <Stack spacing={2} sx={{p:2}}>
+      </Stack>
+    </Container>
+
   )
 }
 

@@ -4,6 +4,10 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
+  fetch('/.netlify/functions/testFunction')
+    .then((res) => res.json())
+    .then((res) => console.log(res))
+
   return (
     <div className={styles.container}>
       <Head>

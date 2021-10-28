@@ -1,3 +1,14 @@
+:root {
+--color-dark: #023047;
+--color-light: #8ecae6;
+--color-orange: #FB8500;
+--color-yellow: #FFB703;
+--color-teal: #219EBC;
+
+--font-header:'Sue Ellen Francisco', cursive;
+--font-body: 'Quicksand', sans-serif;
+}
+
 html,
 body {
   padding: 0;
@@ -13,4 +24,6 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

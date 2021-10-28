@@ -2,11 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import axios from 'axios'
+// import Login from './login'
 
 const Home: NextPage = () => {
-  fetch('/.netlify/functions/testFunction')
+  fetch('.netlify/functions/testFunction')
     .then((res) => res.json())
     .then((res) => console.log(res))
+  
+
 
   return (
     <div className={styles.container}>
@@ -17,6 +21,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        {/* <Login/> */}
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>

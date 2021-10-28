@@ -13,10 +13,17 @@ export const Layout = ({ children }: Props) => {
 		<>
 			<Head>
 				<title>Pupperly</title>
+				<script
+					type='text/javascript'
+					src='https://identity.netlify.com/v1/netlify-identity-widget.js'
+				></script>
 			</Head>
 			<AppBar position='fixed'>
 				<Nav />
 				<h3>this is Layout</h3>
+				<div data-netlify-identity-menu>
+					netlify login cannot run on local server
+				</div>
 			</AppBar>
 			<div className={styles.container}>
 				<main className={styles.main}>{children}</main>

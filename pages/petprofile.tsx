@@ -10,11 +10,11 @@ export default function petProfile() {
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
         <PetProfileInfo/>
       </Paper>
-      <Card sx={{gridColumn:'2', gridRow:'1/4'}}>
+      <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
         <PetProfileVax/>
         <PetProfileMed/>
         <PetProfileHx/>
-      </Card>
+      </Paper>
     </Container>
   )
 }

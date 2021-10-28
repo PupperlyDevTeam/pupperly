@@ -7,7 +7,7 @@ const PetProfileMed = () => {
       <Stack spacing={2} sx={{p:2}}>
         <Typography>Diet:</Typography>
         <Typography>Preventatives:</Typography>
-        <Typography>Vitamins and Supplements:</Typography>
+        <Typography>Vitamins/Supplements:</Typography>
       </Stack>
     </Container>
   )

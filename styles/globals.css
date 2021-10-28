@@ -4,6 +4,9 @@
 --color-orange: #FB8500;
 --color-yellow: #FFB703;
 --color-teal: #219EBC;
+
+--font-header:'Sue Ellen Francisco', cursive;
+--font-body: 'Quicksand', sans-serif;
 }
 
 html,
@@ -21,4 +24,6 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

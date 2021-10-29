@@ -7,7 +7,11 @@ exports.handler = async (event: HandlerEvent) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'ERROR in createPetProfile Netlify function: Method Not Allowed'}
   }
+
+  //pull information from POST request body
+  const { owner_id, name, _id } = JSON.parse(event.body || '');
   
+  console.log(owner_id, name, _id)
   let body = {
     query: `
     mutation createPetProfile($owner_id: String, $_id: String, $name: String) {
@@ -19,17 +23,17 @@ exports.handler = async (event: HandlerEvent) => {
     }
     `,
     variables: {
-      owner_id: "1234000",
-      name: "fido",
-      _id: "12342309523"
+      owner_id,
+      name,
+      _id
     }
   }
 
   axios
     .post(API_ENDPOINT, body, {
-    headers: {
-      'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`
-    }
+      headers: {
+        'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`
+      }
     })
     .then(res => console.log(res.data.errors))
 

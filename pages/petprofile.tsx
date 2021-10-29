@@ -4,7 +4,7 @@ import PetProfileMed from "../components/PetProfileMed"
 import PetProfileVax from "../components/PetProfileVax"
 import type { NextPage } from 'next'
 
-import { Container, Grid, Stack, Box, Card, Paper } from "@mui/material"
+import { Container, Button, Paper } from "@mui/material"
 
 const PetProfile: NextPage = () => {
   return (
@@ -17,6 +17,21 @@ const PetProfile: NextPage = () => {
         <PetProfileMed/>
         <PetProfileHx/>
       </Paper>
+      <Button
+        onClick={() => fetch('/.netlify/functions/createPetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            owner_id: '103333',
+            name: 'kailee',
+            _id: '13035135'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+      }
+      >
+        Create Pet Profile
+      </Button>
     </Container>
   )
 }

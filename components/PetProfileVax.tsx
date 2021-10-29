@@ -1,5 +1,5 @@
 //this component need to conditionally render based on species.
-import { Avatar, Card, Typography, Box, Stack, Container } from "@mui/material"
+import { Avatar, Card, Typography, Box, Stack, Container, Button } from "@mui/material"
 
 const PetProfileVax = () => {
   return (
@@ -13,6 +13,7 @@ const PetProfileVax = () => {
           <Typography>Lyme</Typography>
           <Typography>Influenza</Typography>
         </Stack>
+        <Button variant="contained" size="small" onClick={()=>{alert('clicked')}}>Edit</Button>
     </Container>
   )
 }

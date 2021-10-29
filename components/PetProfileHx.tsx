@@ -1,4 +1,4 @@
-import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper } from "@mui/material"
+import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button } from "@mui/material"
 
 const PetProfileHx = () => {
   return (
@@ -6,6 +6,7 @@ const PetProfileHx = () => {
       <Typography>Major Medication History</Typography>
       <Stack spacing={2} sx={{p:2}}>
       </Stack>
+      <Button variant="contained" size="small" onClick={()=>{alert('clicked')}}>Edit</Button>
     </Container>
 
   )

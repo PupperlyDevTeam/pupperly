@@ -1,4 +1,4 @@
-import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper } from "@mui/material"
+import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button } from "@mui/material"
 
 const PetProfileInfo = () => {
   return (

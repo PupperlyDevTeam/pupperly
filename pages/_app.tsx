@@ -1,9 +1,11 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-// import  netlifyIdentity from 'netlify-identity-widget';
-
+import {AuthContextProvider} from '../stores/authContext'
 function MyApp({ Component, pageProps }: AppProps) {
-  // netlifyIdentity.init()
-  return <Component {...pageProps} />
+  return (
+  <AuthContextProvider>
+  <Component {...pageProps} />
+  </AuthContextProvider>
+  )
 }
 export default MyApp

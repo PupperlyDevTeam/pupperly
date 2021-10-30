@@ -28,6 +28,7 @@ const PetProfile: NextPage = () => {
         })
         .then((res) => res.json())
         .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
       }
       >
         Create Pet Profile
@@ -41,6 +42,7 @@ const PetProfile: NextPage = () => {
         })
         .then((res) => res.json())
         .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
       }
       >
         Delete Pet Profile
@@ -58,6 +60,20 @@ const PetProfile: NextPage = () => {
       }
       >
         Get Pet Profile
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/getPetProfileByOwner', {
+          method: 'POST',
+          body: JSON.stringify({
+            _eq: '103333'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+        Get Pet Profile BY OWNER
       </Button>
     </Container>
   )

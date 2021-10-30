@@ -5,26 +5,22 @@ const API_ENDPOINT = 'https://pupperly-api.hasura.app/v1/graphql'
 
 exports.handler = async (event: HandlerEvent) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'ERROR in createPetProfile Netlify function: Method Not Allowed'}
+    return { statusCode: 405, body: 'ERROR in deletePetProfile Netlify function: Method Not Allowed'}
   }
 
   //pull information from POST request body
-  const { owner_id, name, _id } = JSON.parse(event.body || '');
+  const { _id } = JSON.parse(event.body || '');
   
-  console.log(owner_id, name, _id)
+  console.log( _id)
   let body = {
     query: `
-    mutation createPetProfile($owner_id: String, $_id: String, $name: String) {
-      insert_pet_profile(objects: {owner_id: $owner_id, _id: $_id, name: $name}) {
-        returning {
-          _id
-        }
+    mutation delete_an_object($_id: String!) {
+      delete_pet_profile_by_pk(_id: $_id) {
+        _id
       }
-    }
+    }    
     `,
     variables: {
-      owner_id,
-      name,
       _id
     }
   }
@@ -40,12 +36,12 @@ exports.handler = async (event: HandlerEvent) => {
       console.log(err)
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to createPetProfile'})
+        body: JSON.stringify({ error: 'Failed to deletePetProfile'})
       }
     })
-    
+
   return {
     statusCode: 200,
-    body: JSON.stringify('Profile successfully created')
+    body: JSON.stringify('Profile successfully deleted')
   }
 }

@@ -42,15 +42,82 @@ const PetProfile: NextPage = () => {
           method: 'POST',
           body: JSON.stringify({
             owner_id: '103333',
-            name: 'kailee',
+            name: 'nick',
+            _id: '65465469849615'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+        Create Pet Profile
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/deletePetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            _id: '1234'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+        Delete Pet Profile
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/getPetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
             _id: '13035135'
           })
         })
         .then((res) => res.json())
         .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
       }
       >
-        Create Pet Profile
+        Get Pet Profile
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/getPetProfileByOwner', {
+          method: 'POST',
+          body: JSON.stringify({
+            _eq: '103333'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+        Get Pet Profile BY OWNER
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/updatePetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            _id: '26236',
+            allergies: 'water',
+            breed: 'Koi',
+            dob: '2020-12-12',
+            med_hx: JSON.stringify(['debloating']),
+            medications: JSON.stringify(['fish zoloft']),
+            name: 'Goldfish',
+            sex: 'M',
+            species: 'Fish',
+            surg_hx: null, //must json.stringify any array values
+            vaccinations: null //must json.stringify any array values
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+       Update Pet Profile
       </Button>
     </Container>
   )

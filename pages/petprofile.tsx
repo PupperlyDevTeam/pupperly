@@ -75,6 +75,30 @@ const PetProfile: NextPage = () => {
       >
         Get Pet Profile BY OWNER
       </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/updatePetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            _id: '26236',
+            allergies: 'water',
+            breed: 'Koi',
+            dob: '2020-12-12',
+            med_hx: JSON.stringify(['debloating']),
+            medications: JSON.stringify(['fish zoloft']),
+            name: 'Goldfish',
+            sex: 'M',
+            species: 'Fish',
+            surg_hx: null,
+            vaccinations: null
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+       Update Pet Profile
+      </Button>
     </Container>
   )
 }

@@ -5,7 +5,7 @@ const API_ENDPOINT = 'https://pupperly-api.hasura.app/v1/graphql'
 
 exports.handler = async (event: HandlerEvent) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'ERROR in getPetProfile Netlify function: Method Not Allowed'}
+    return { statusCode: 405, body: 'ERROR in getPetProfileByOwner Netlify function: Method Not Allowed'}
   }
 
   //pull information from POST request body

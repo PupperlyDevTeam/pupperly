@@ -5,7 +5,7 @@ const API_ENDPOINT = 'https://pupperly-api.hasura.app/v1/graphql'
 
 exports.handler = async (event: HandlerEvent) => {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'ERROR in deletePetProfile Netlify function: Method Not Allowed'}
+    return { statusCode: 405, body: 'ERROR in getPetProfile Netlify function: Method Not Allowed'}
   }
 
   //pull information from POST request body
@@ -14,34 +14,46 @@ exports.handler = async (event: HandlerEvent) => {
   console.log( _id)
   let body = {
     query: `
-    mutation delete_an_object($_id: String!) {
-      delete_pet_profile_by_pk(_id: $_id) {
-        _id
+    query getPetProfile($_id: String!) {
+      pet_profile_by_pk(_id: $_id) {
+        allergies
+        breed
+        dob
+        med_hx
+        medications
+        name
+        sex
+        species
+        surg_hx
+        vaccinations
       }
-    }    
+    }
+      
     `,
     variables: {
       _id
     }
   }
 
-  axios
+  const response = await axios
     .post(API_ENDPOINT, body, {
       headers: {
         'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`
       }
     })
-    .then(res => console.log(res.data))
+    .then(res => {
+      return {
+        statusCode: 200,
+        body: JSON.stringify(res.data.data.pet_profile_by_pk)
+      }
+    })
     .catch(err => {
-      console.log(err)
+      console.log('err', err);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to deletePetProfile'})
+        body: JSON.stringify({ error: 'Failed to getPetProfile'})
       }
     })
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify('Profile successfully deleted')
-  }
+  return response;
 }

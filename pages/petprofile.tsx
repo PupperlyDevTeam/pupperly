@@ -45,6 +45,20 @@ const PetProfile: NextPage = () => {
       >
         Delete Pet Profile
       </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/getPetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            _id: '13035135'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+        .catch((err) => console.log('err, ', err))
+      }
+      >
+        Get Pet Profile
+      </Button>
     </Container>
   )
 }

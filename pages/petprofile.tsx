@@ -22,8 +22,8 @@ const PetProfile: NextPage = () => {
           method: 'POST',
           body: JSON.stringify({
             owner_id: '103333',
-            name: 'kailee',
-            _id: '13035135'
+            name: 'nick',
+            _id: '65465469849615'
           })
         })
         .then((res) => res.json())
@@ -31,6 +31,19 @@ const PetProfile: NextPage = () => {
       }
       >
         Create Pet Profile
+      </Button>
+      <Button
+        onClick={() => fetch('/.netlify/functions/deletePetProfile', {
+          method: 'POST',
+          body: JSON.stringify({
+            _id: '13035135'
+          })
+        })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+      }
+      >
+        Delete Pet Profile
       </Button>
     </Container>
   )

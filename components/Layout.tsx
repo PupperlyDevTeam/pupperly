@@ -1,6 +1,6 @@
 //import React from 'react'
 import { ClassNames } from '@emotion/react';
-import styles from '../styles/Home.module.css';
+//import '../styles/Home.module.css';
 import Head from 'next/head';
 import { Nav } from './Nav';
 import { AppBar } from '@mui/material';
@@ -18,15 +18,13 @@ export const Layout = ({ children }: Props) => {
 					src='https://identity.netlify.com/v1/netlify-identity-widget.js'
 				></script>
 			</Head>
-			<AppBar position='fixed'>
+			<AppBar position='fixed' style={{ background: '#023047' }}>
 				<Nav />
 				<h3>this is Layout</h3>
-				<div data-netlify-identity-menu>
-					netlify login cannot run on local server
-				</div>
+				<div data-netlify-identity-menu>netlify identity menu src link</div>
 			</AppBar>
-			<div className={styles.container}>
-				<main className={styles.main}>{children}</main>
+			<div>
+				<main>{children}</main>
 			</div>
 		</>
 	);

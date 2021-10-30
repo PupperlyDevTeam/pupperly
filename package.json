@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.5",
+    "@mui/material": "^5.0.5",
     "@netlify/functions": "^0.8.0",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",

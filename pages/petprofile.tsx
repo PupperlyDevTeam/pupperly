@@ -6,7 +6,7 @@ import type { NextPage } from 'next'
 
 import { Container, Button, Paper } from "@mui/material"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const PetProfile: NextPage = () => {
   //onclick will change the boolean value of disabled for text field
@@ -23,6 +23,7 @@ const PetProfile: NextPage = () => {
     //set state for petprofile
     //invoke updatePetProfile.ts
   }
+
  
   const [petProfile, setPetProfile] = useState({
     allergies:[],
@@ -37,11 +38,27 @@ const PetProfile: NextPage = () => {
     vaccinations:{rabies:'', distemper:'', bordetella:'', lepto:'', lyme:'', flu:''},
   })
 
+  useEffect (()=> {
+    fetch('/.netlify/functions/getPetProfile', {
+      method: 'POST',
+      body: JSON.stringify({
+        _id: '13035135'
+      })
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      const {allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations} = res
+      //console.log('this is the breakdown of the information', allergies)
+      setPetProfile({allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations})
+      console.log('this is in state', petProfile);
+    })
+    .catch((err) => console.log('err, ', err))
+  },[])
 
   return (
     <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
-        <PetProfileInfo/>
+        <PetProfileInfo isEdit={isEdit}/>
       </Paper>
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
         <PetProfileVax isEdit={isEdit}/>

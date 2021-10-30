@@ -88,8 +88,8 @@ const PetProfile: NextPage = () => {
             name: 'Goldfish',
             sex: 'M',
             species: 'Fish',
-            surg_hx: null,
-            vaccinations: null
+            surg_hx: null, //must json.stringify any array values
+            vaccinations: null //must json.stringify any array values
           })
         })
         .then((res) => res.json())

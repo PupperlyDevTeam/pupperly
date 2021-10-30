@@ -6,7 +6,7 @@ import type { NextPage } from 'next'
 
 import { Container, Button, Paper } from "@mui/material"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 const PetProfile: NextPage = () => {
   //onclick will change the boolean value of disabled for text field
@@ -20,11 +20,24 @@ const PetProfile: NextPage = () => {
   function submitButton(){
     setEdit(true)
     console.log(isEdit)
+    //set state for petprofile
+    //invoke updatePetProfile.ts
   }
  
-  // useEffect(() => {console.log(edit)}, [edit]);
+  const [petProfile, setPetProfile] = useState({
+    allergies:[],
+    breed:'',
+    dob:'',
+    med_hx:[],
+    medications:{diet:[], preventative:[], supplements:[]},
+    name:'',
+    sex:'',
+    species:'',
+    surg_hx:[],
+    vaccinations:{rabies:'', distemper:'', bordetella:'', lepto:'', lyme:'', flu:''},
+  })
 
-  //big submit button to disable all the fields
+
   return (
     <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
@@ -33,7 +46,7 @@ const PetProfile: NextPage = () => {
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
         <PetProfileVax isEdit={isEdit}/>
         <PetProfileMed isEdit={isEdit}/>
-        <PetProfileHx isEdit={isEdit}/>
+        <PetProfileHx isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <Button variant="contained" size="small" onClick={editButton}>Edit</Button>
         <Button variant="contained" size="small" onClick={submitButton}>Submit</Button>
       </Paper>

@@ -14,15 +14,11 @@ exports.handler = async (event: HandlerEvent) => {
   console.log( _id)
   let body = {
     query: `
-    mutation delete_an_object($_id: String) {
-        delete_pet_profile_by_pk (
-        objects: {_id: $_id}
-        ) {
-        returning{
-          _id
-         }
-        }
-       }
+    mutation delete_an_object($_id: String!) {
+      delete_pet_profile_by_pk(_id: $_id) {
+        _id
+      }
+    }    
     `,
     variables: {
       _id

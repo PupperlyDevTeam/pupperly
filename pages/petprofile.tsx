@@ -6,16 +6,36 @@ import type { NextPage } from 'next'
 
 import { Container, Button, Paper } from "@mui/material"
 
+import { useState, useEffect } from "react"
+
 const PetProfile: NextPage = () => {
+  //onclick will change the boolean value of disabled for text field
+  const [isEdit, setEdit] = useState(true);
+
+  function editButton() {
+    setEdit(false);
+    console.log(isEdit)
+  }
+  
+  function submitButton(){
+    setEdit(true)
+    console.log(isEdit)
+  }
+ 
+  // useEffect(() => {console.log(edit)}, [edit]);
+
+  //big submit button to disable all the fields
   return (
     <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
         <PetProfileInfo/>
       </Paper>
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
-        <PetProfileVax/>
-        <PetProfileMed/>
-        <PetProfileHx/>
+        <PetProfileVax isEdit={isEdit}/>
+        <PetProfileMed isEdit={isEdit}/>
+        <PetProfileHx isEdit={isEdit}/>
+        <Button variant="contained" size="small" onClick={editButton}>Edit</Button>
+        <Button variant="contained" size="small" onClick={submitButton}>Submit</Button>
       </Paper>
       <Button
         onClick={() => fetch('/.netlify/functions/createPetProfile', {

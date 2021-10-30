@@ -1,15 +1,18 @@
-import { Avatar, Card, Typography, Box, Stack, Container, Button } from "@mui/material"
+import { Avatar, Card, Typography, Box, Stack, Container, Button, FormControl, TextField } from "@mui/material"
+import { useState, useEffect } from "react"
 
-const PetProfileMed = () => {
+const PetProfileMed = ({isEdit}) => {
+
   return (
     <Container>
       <Typography>Medications</Typography>
       <Stack spacing={2} sx={{p:2}}>
-        <Typography>Diet:</Typography>
-        <Typography>Preventatives:</Typography>
-        <Typography>Vitamins/Supplements:</Typography>
+        <FormControl>
+        <Typography>Diet:</Typography> <TextField disabled={isEdit} id="food" label="What does your pet eat?"/>
+        <Typography>Preventatives:</Typography> <TextField disabled={isEdit} id="preventatives" label="Flea/Tick/Heartworm Products"/>
+        <Typography>Vitamins/Supplements:</Typography> <TextField disabled={isEdit} id="supplements"label="Anything else?"/>
+        </FormControl>
       </Stack>
-      <Button variant="contained" size="small" onClick={()=>{alert('clicked')}}>Edit</Button>
     </Container>
   )
 }

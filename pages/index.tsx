@@ -29,8 +29,7 @@ const Home: NextPage = () => {
         <div>
        {!user && <button onClick={login} style={homeStyles.btn} > Login/Register </button>}
        {/* {user && <p>{user?.email}</p>}
-       <div>{JSON.stringify(user)}</div>
-       {user && <button onClick={logout}>logout</button>} */}
+       <div>{JSON.stringify(user)}</div> */}
         </div>
         } 
       
@@ -62,32 +61,6 @@ const homeStyles:any = {
     borderRadius: '30px',
     border: 'none',
   }
-  // container: {
-  //   minHeight: '100vh',
-  //   padding: '0 0.5rem',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   height: '100vh',
-  // },
-  // main: {
-  //   padding: '5rem 0',
-  //   flex: '1',
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
-  // footer: {
-  //   width: '100%',
-  //   height: '100px',
-  //   borderTop: '1px solid #eaeaea',
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // }
-  
 
 }
 export default Home

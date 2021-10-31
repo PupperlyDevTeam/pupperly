@@ -23,7 +23,7 @@ function Header() {
             <Image src="/pupperly_web.png" alt="Pupperly Logo" width={275} height={104} />
            {!user && <button onClick={login} style = {styles.btn}>Login</button>}
            {user && <div style={styles.rightNav}>
-           <p style ={styles.user}>{user.user_metadata.full_name}</p>
+           <p style ={styles.user}>{user.user_metadata.full_name ?? null}</p>
            <button onClick={logout} style = {styles.btn}>Logout</button>
            </div>
            }

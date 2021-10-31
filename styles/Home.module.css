@@ -56,6 +56,8 @@ background-position: center center;
   padding: 10px;
   border-radius: 15px;
   background-color: #219ebc;
+  box-shadow: 5px 5px 10px #6060607b;
+
 }
 .featureCard p {
   color: #023047;

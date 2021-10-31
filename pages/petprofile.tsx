@@ -21,9 +21,9 @@ const PetProfile: NextPage = () => {
         onClick={() => fetch('/.netlify/functions/createPetProfile', {
           method: 'POST',
           body: JSON.stringify({
-            owner_id: '103333',
+            owner_id: '2355252',
             name: 'nick',
-            _id: '6546546541654646'
+            _id: '1234'
           })
         })
         .then((res) => res.json())

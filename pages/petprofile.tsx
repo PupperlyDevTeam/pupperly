@@ -23,7 +23,7 @@ const PetProfile: NextPage = () => {
           body: JSON.stringify({
             owner_id: '103333',
             name: 'nick',
-            _id: '65465469849615'
+            _id: '6546546541654646'
           })
         })
         .then((res) => res.json())

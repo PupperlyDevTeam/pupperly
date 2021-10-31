@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import Image from 'next/image'
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,9 +20,9 @@ function Header() {
       };
     return (
         <div style={styles.container}>
-           <h1>pupperly</h1> 
+            <Image src="/pupperly_web.png" alt="Pupperly Logo" width={275} height={104} />
            {!user && <button onClick={login} style = {styles.btn}>Login</button>}
-       {user && <div style={styles.rightNav}>
+           {user && <div style={styles.rightNav}>
            <p style ={styles.user}>{user.user_metadata.full_name}</p>
            <button onClick={logout} style = {styles.btn}>Logout</button>
            </div>
@@ -82,7 +83,7 @@ const styles:any = {
         padding: '0 15px',
         backgroundColor:'#023047',
         color:'#ffb703',
-        borderRadius: '0,0,10%,10% !important',
+        // borderRadius: '0 0 10px 10px',
     },
     menuItem: {
         backgroundColor:'#ffb703',

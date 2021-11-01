@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import handler from '../netlify/functions/createPetProfile'
 import Router from 'next/router';
+//import handler from '../netlify/functions/getPetProfileByOwner';
 
 import {
 	Box,
@@ -64,7 +65,7 @@ const userHome = (props: Props) => {
 			method: 'POST',
 			body: JSON.stringify({
 				// todo: add owner id
-				owner_id: '',
+				owner_id: '65465469849615',
 			}),
 		})
 			.then((res) => res.json())
@@ -77,7 +78,7 @@ const userHome = (props: Props) => {
 			});
 		return pets;
 	};
-
+	getPetProfileByOwner();
 	// todo: useEffect render all pets basic info after retrieving it from DB
 	// ? /*  */if one of the items in data is null, render null? or not render that item?
 
@@ -90,7 +91,7 @@ const userHome = (props: Props) => {
 	//todo: direct to petprofile page once user click on NEXT button
 	// ? Do we also create a pet profile for the user as well here ?
 	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
-		//e.preventDefault();
+		e.preventDefault();
 		console.log('next button clicked');
 		//direct to petprofile page
 		Router.push('/petprofile');
@@ -150,7 +151,7 @@ const userHome = (props: Props) => {
 									/>
 								</Box>
 							</div>
-							<Button variant='contained' onClick={() => handleNext()}>
+							<Button variant='contained' onClick={(e) => handleNext(e)}>
 								NEXT
 							</Button>
 						</Typography>

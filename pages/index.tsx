@@ -42,6 +42,9 @@ const Home: NextPage = () => {
 			<h1>this is index.tsx which should be the landing page</h1>
 			<br />
 			{/* data: {getPetProfileByOwner()} */}
+			<div>
+				<h5>here should be cartoon dogs and cats</h5>
+			</div>
 		</div>
 	);
 };

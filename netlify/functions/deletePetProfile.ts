@@ -25,13 +25,19 @@ exports.handler = async (event: HandlerEvent) => {
     }
   }
 
-  axios
+  const response = await axios
     .post(API_ENDPOINT, body, {
       headers: {
         'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`
       }
     })
-    .then(res => console.log(res.data))
+    .then(res => {
+      console.log(res.data)
+      return {
+        statusCode: 200,
+        body: JSON.stringify('Profile successfully deleted')
+      }
+    })
     .catch(err => {
       console.log(err)
       return {
@@ -39,9 +45,6 @@ exports.handler = async (event: HandlerEvent) => {
         body: JSON.stringify({ error: 'Failed to deletePetProfile'})
       }
     })
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify('Profile successfully deleted')
-  }
+  
+  return response;
 }

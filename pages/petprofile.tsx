@@ -73,7 +73,7 @@ const PetProfile: NextPage = () => {
   return (
     <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
-        <PetProfileInfo isEdit={isEdit}/>
+        <PetProfileInfo isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
       </Paper>
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
         <PetProfileVax isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>

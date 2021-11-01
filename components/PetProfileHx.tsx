@@ -34,9 +34,9 @@ const PetProfileHx = ({isEdit, petProfile, setPetProfile}) => {
       <Typography>Major Medical History</Typography>
       <Stack spacing={2} sx={{p:2}}>
         <FormControl>
-        <Typography>Allergies</Typography> <TextField disabled={isEdit} id="allergies" label="Food, Medications , Others?" value={petProfile.allergies} onChange={updateHx}/>
-        <Typography>Illnesses</Typography> <TextField disabled={isEdit} id="medhx" label="Any Major Illnesses?" value={petProfile.med_hx} onChange={updateHx} />
-        <Typography>Surgical History</Typography> <TextField disabled={isEdit} id="surghx" label="Previous Surgeries" value={petProfile.surg_hx} onChange={updateHx}/>
+        <Typography>Allergies</Typography> <TextField disabled={isEdit} id="allergies" placeholder="Food, Medications , Others?" value={petProfile.allergies} onChange={updateHx}/>
+        <Typography>Illnesses</Typography> <TextField disabled={isEdit} id="medhx" placeholder="Any Major Illnesses?" value={petProfile.med_hx} onChange={updateHx} />
+        <Typography>Surgical History</Typography> <TextField disabled={isEdit} id="surghx" placeholder="Previous Surgeries" value={petProfile.surg_hx} onChange={updateHx}/>
         </FormControl>
       </Stack>
     </Container>

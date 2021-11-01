@@ -63,9 +63,11 @@ const PetProfile: NextPage = () => {
     })
     .then((res) => res.json())
     .then((res) => {
+      console.log('this is the response', res)
       const {allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations} = res
       //console.log('this is the breakdown of the information', allergies)
       setPetProfile({allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations})
+      //why is all the data returning as an string rather than an array 
       console.log('this is in state', petProfile);
     })
     .catch((err) => console.log('err, ', err))

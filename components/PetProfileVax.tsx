@@ -39,12 +39,12 @@ const PetProfileVax = ({isEdit, petProfile, setPetProfile}) => {
       <Typography>Vaccinations</Typography>
       <Typography>Please only fill in vaccinations applicable to your pet.</Typography>
         <FormControl sx={{p:2}}>
-          <Typography>Rabies</Typography><TextField disabled={isEdit} id="rabies" variant='outlined' label="Date Given" value={petProfile.vaccinations.rabies} onChange={updateHx} />
-          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEdit} id="distemper" variant='outlined' label="Date Given" value={petProfile.vaccinations.distemper} onChange={updateHx}/>
-          <Typography>Bordetella</Typography><TextField disabled={isEdit} id="bordetella" variant='outlined' label="Date Given" value={petProfile.vaccinations.bordetella} onChange={updateHx}/>
-          <Typography>Leptospirosis</Typography><TextField disabled={isEdit} id="lepto" variant='outlined' label="Date Given" value={petProfile.vaccinations.lepto} onChange={updateHx}/>
-          <Typography>Lyme</Typography><TextField disabled={isEdit} id="lyme" variant='outlined' label="Date Given" value={petProfile.vaccinations.lyme} onChange={updateHx}/>
-          <Typography>Influenza</Typography><TextField disabled={isEdit} id="flu" variant='outlined' label="Date Given" value={petProfile.vaccinations.flu} onChange={updateHx}/>
+          <Typography>Rabies</Typography><TextField disabled={isEdit} id="rabies" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.rabies} onChange={updateHx} />
+          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEdit} id="distemper" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.distemper} onChange={updateHx}/>
+          <Typography>Bordetella</Typography><TextField disabled={isEdit} id="bordetella" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.bordetella} onChange={updateHx}/>
+          <Typography>Leptospirosis</Typography><TextField disabled={isEdit} id="lepto" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.lepto} onChange={updateHx}/>
+          <Typography>Lyme</Typography><TextField disabled={isEdit} id="lyme" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.lyme} onChange={updateHx}/>
+          <Typography>Influenza</Typography><TextField disabled={isEdit} id="flu" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.flu} onChange={updateHx}/>
         </FormControl>
     </Container>
   )

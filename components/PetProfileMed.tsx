@@ -1,7 +1,7 @@
 import { Avatar, Card, Typography, Box, Stack, Container, Button, FormControl, TextField } from "@mui/material"
 import { useState, useEffect } from "react"
 
-const PetProfileMed = ({isEdit}) => {
+const PetProfileMed = ({isEdit, petProfile, setPetProfile}) => {
 
   return (
     <Container>

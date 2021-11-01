@@ -20,8 +20,25 @@ const PetProfile: NextPage = () => {
   function submitButton(){
     setEdit(true)
     console.log(isEdit)
-    //set state for petprofile
-    //invoke updatePetProfile.ts
+    console.log(petProfile)
+
+    // fetch('/.netlify/functions/updatePetProfile', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     _id: '26236',
+    //     allergies: 'water',
+    //     breed: 'Koi',
+    //     dob: '2020-12-12',
+    //     med_hx: JSON.stringify(['debloating']),
+    //     medications: JSON.stringify(['fish zoloft']),
+    //     name: 'Goldfish',
+    //     sex: 'M',
+    //     species: 'Fish',
+    //     surg_hx: null, //must json.stringify any array values
+    //     vaccinations: null //must json.stringify any array values
+    //   })
+    // })
+
   }
 
  
@@ -61,8 +78,8 @@ const PetProfile: NextPage = () => {
         <PetProfileInfo isEdit={isEdit}/>
       </Paper>
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
-        <PetProfileVax isEdit={isEdit}/>
-        <PetProfileMed isEdit={isEdit}/>
+        <PetProfileVax isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+        <PetProfileMed isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <PetProfileHx isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <Button variant="contained" size="small" onClick={editButton}>Edit</Button>
         <Button variant="contained" size="small" onClick={submitButton}>Submit</Button>

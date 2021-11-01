@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 
 
 
-const PetProfileVax = ({isEdit}) => {
+const PetProfileVax = ({isEdit, petProfile, setPetProfile}) => {
 
   return (
     <Container>

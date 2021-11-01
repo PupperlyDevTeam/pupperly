@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 //import handler from '../netlify/functions/createPetProfile'
+import Router from 'next/router';
 
 import {
 	Box,
@@ -37,16 +38,7 @@ const style = {
 	p: 4,
 };
 const userHome = (props: Props) => {
-	// const [petInfo, setPetInfo] = useState({
-	// 	petName: '',
-	// 	gender: '',
-	// 	species: '',
-	// 	breed: '',
-	// });
 	const [petName, setPetName] = useState('');
-	const [sex, setSex] = useState('');
-	const [species, setSpecies] = useState('');
-	const [breed, setBreed] = useState('');
 	/* Modal */
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
@@ -54,24 +46,55 @@ const userHome = (props: Props) => {
 
 	// dummyData
 	const dummyData = [
-		{ petName: 'A', Gender: 'Male', Species: 'Dog', Breed: 'Maltese' },
-		{ petName: 'B', Gender: 'Female', Species: 'cat', Breed: 'I dont know' },
-		{ petName: 'C', Gender: 'Male', Species: 'Dog', Breed: 'mix of unknown' },
+		{ name: 'A', species: 'Dog', breed: 'Maltese', dob: '01/01/2020' },
+		{ name: 'B', species: 'cat', breed: 'I dont know', dob: '01/01/2020' },
+		{
+			name: 'C',
+			species: 'Dog',
+			breed: 'mix',
+			dob: '01/01/2020',
+		},
 	];
-	// console.log('dummyData: ', dummyData);
-
-	// todo: handle submit
-	const handleSubmit = () => {};
 
 	// todo: fetch all user's pet info
-	const getPetsInfo = () => {};
+	// get pet profile by owner id
+	let pets: [];
+	const getPetProfileByOwner = async () => {
+		await fetch('/.netlify/functions/getPetProfileByOwner', {
+			method: 'POST',
+			body: JSON.stringify({
+				// todo: add owner id
+				owner_id: '',
+			}),
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log('res from getPetProfileByOwner: ', res);
+				pets = res;
+			})
+			.catch((err) => {
+				console.log('err from getPetProfileByOwner: ', err);
+			});
+		return pets;
+	};
 
-	// todo: useEffect render all pets basic info
+	// todo: useEffect render all pets basic info after retrieving it from DB
+	// ? /*  */if one of the items in data is null, render null? or not render that item?
+
+	/* 	useEffect(() => {
+		getPetProfileByOwner();
+	},[]); */
 
 	// todo: testing backend functionalities
-	// const data = fetch('/.netlify/functions/testFunction')
-	// .then((res) => res.json())
-	// .then((res) => console.log('res is: ', res));
+
+	//todo: direct to petprofile page once user click on NEXT button
+	// ? Do we also create a pet profile for the user as well here ?
+	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
+		//e.preventDefault();
+		console.log('next button clicked');
+		//direct to petprofile page
+		Router.push('/petprofile');
+	};
 	return (
 		<div>
 			<h3>this is user's home page</h3>
@@ -83,16 +106,17 @@ const userHome = (props: Props) => {
 							<Card>
 								<CardContent>
 									<Typography>
-										<h3>Name: {item.petName}</h3>
-										<h4>Sex: {item.Gender}</h4>
-										<h4>Species: {item.Species}</h4>
-										<h4>Breed: {item.Breed}</h4>
+										<h3>Name: {item.name}</h3>
+										<h4>Species: {item.species}</h4>
+										<h4>Breed: {item.breed}</h4>
+										<h4>DOB: {item.dob}</h4>
 									</Typography>
 								</CardContent>
 							</Card>
 						</Grid>
 					))}
 				</Grid>
+				<br />
 				<Button variant='contained' endIcon={<AddIcon />} onClick={handleOpen}>
 					ADD
 				</Button>
@@ -124,30 +148,11 @@ const userHome = (props: Props) => {
 											setPetName(e.target.value);
 										}}
 									/>
-									<Input
-										required
-										placeholder='Gender'
-										onChange={(e) => {
-											setSex(e.target.value);
-										}}
-									/>
-									<Input
-										required
-										placeholder='Species'
-										onChange={(e) => {
-											setSpecies(e.target.value);
-										}}
-									/>
-									<Input
-										required
-										placeholder='Breed'
-										onChange={(e) => {
-											setBreed(e.target.value);
-										}}
-									/>
 								</Box>
 							</div>
-							<Button>submit</Button>
+							<Button variant='contained' onClick={() => handleNext()}>
+								NEXT
+							</Button>
 						</Typography>
 					</Box>
 				</Modal>

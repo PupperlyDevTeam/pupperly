@@ -38,7 +38,14 @@ exports.handler = async (event: HandlerEvent) => {
 				'x-hasura-admin-secret': `${process.env.HASURA_ADMIN_SECRET}`,
 			},
 		})
-		.then((res) => console.log(res.data.errors));
+		.then((res) => console.log(res.data))
+		.catch((err) => {
+			console.log(err);
+			return {
+				statusCode: 500,
+				body: JSON.stringify({ error: 'Failed to createPetProfile' }),
+			};
+		});
 
 	return {
 		statusCode: 200,

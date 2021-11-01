@@ -9,18 +9,11 @@ import Header from '../components/Header';
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<AuthContextProvider>
-			<Layout>
-				<Header />
-				<Component {...pageProps} />
-			</Layout>
+			{/* <Layout> */}
+			<Header />
+			<Component {...pageProps} />
+			{/* </Layout> */}
 		</AuthContextProvider>
-		// <>
-		// 	<Head>
-		// 		<title>Pupperly</title>
-		// 	</Head>
-		// 	<Nav />
-		// 	<Component {...pageProps} />
-		// </>
 	);
 }
 

@@ -10,7 +10,7 @@ import { useState, useEffect } from "react"
 
 const PetProfile: NextPage = () => {
   //onclick will change the boolean value of disabled for text field
-  const [isEdit, setEdit] = useState(true);
+  const [isEdit: boolean, setEdit] = useState(true);
 
   function editButton() {
     setEdit(false);

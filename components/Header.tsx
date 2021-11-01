@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import headStyles from '../styles/Header.module.css';
+import styles from '../styles/Header.module.css';
 import AuthContext from '../stores/authContext';
 
 function Header() {
@@ -18,7 +18,7 @@ function Header() {
     setAnchorEl(null);
   };
   return (
-    <div style={styles.container}>
+    <div className={styles.container}>
       <Image
         src="/pupperly_web.png"
         alt="Pupperly Logo"
@@ -27,90 +27,56 @@ function Header() {
       />
 
       {!user && (
-        <div className={headStyles.headerLogBtn}>
-          <button onClick={login} style={styles.btn}>
+        <div className={styles.headerLogBtn}>
+          <button onClick={login} className={styles.btn}>
             Login
           </button>
         </div>
       )}
       {user && (
-        <div style={styles.rightNav}>
-          <p style={styles.user}>{user.user_metadata.full_name ?? null}</p>
-          <button onClick={logout} style={styles.btn}>
+        <div className={styles.rightNav}>
+          <p className={styles.user}>{user.user_metadata.full_name ?? null}</p>
+          <button onClick={logout} className={styles.btn}>
             Logout
           </button>
         </div>
       )}
-      {/* {user && (
-            <div>
-                {user?.user_metadata.full_name}
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={logout} sx={styles.menuItem}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )} */}
+
+      {user && (
+        <div className={styles.mobileNav}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={logout} sx={styles.menuItem}>
+              Logout
+            </MenuItem>
+          </Menu>
+        </div>
+      )}
     </div>
   );
 }
 
-const styles: any = {
-  btn: {
-    height: '50px',
-    backgroundColor: '#ffb703',
-    color: '#023047',
-    padding: '10px 20px',
-    fontSize: '1.2em',
-    fontWeight: '700',
-    borderRadius: '30px',
-    border: 'none',
-  },
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    height: '100px',
-    width: 'auto',
-    padding: '0 15px',
-    backgroundColor: '#023047',
-    color: '#ffb703',
-    // borderRadius: '0 0 10px 10px',
-  },
-  menuItem: {
-    backgroundColor: '#ffb703',
-    margin: '0',
-    height: '100%',
-  },
-  rightNav: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1em',
-  },
-  user: {
-    fontSize: '1.5em',
-  },
-};
 export default Header;

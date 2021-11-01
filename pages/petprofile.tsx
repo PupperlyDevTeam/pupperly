@@ -14,12 +14,10 @@ const PetProfile: NextPage = () => {
 
   function editButton() {
     setEdit(false);
-    console.log(isEdit)
   }
   
   function submitButton(){
     setEdit(true)
-    console.log(isEdit)
     console.log(petProfile)
 
     // fetch('/.netlify/functions/updatePetProfile', {

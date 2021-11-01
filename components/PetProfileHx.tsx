@@ -1,24 +1,33 @@
 import { Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField, FormControl } from "@mui/material"
+import { useEffect } from 'react';
 
 const PetProfileHx = ({isEdit, petProfile, setPetProfile}) => {
   //const isEdit = {isEdit}
   function updateHx (e) {
     e.preventDefault();
+    
+    //converts the string to an array in order to pass it to database
+    function stringToArray(string) {
+      const splitted = string.split(',')
+      return [...splitted];
+    }
    
     switch (e.target.id) {
       case 'medhx' :
-        setPetProfile({...petProfile, med_hx:e.target.value});
+        setPetProfile({...petProfile, med_hx:stringToArray(e.target.value)});
+        //console.log(petProfile.med_hx)
         break;
       case 'allergies' :
-        setPetProfile({...petProfile, allergies:e.target.value});
+        setPetProfile({...petProfile, allergies:stringToArray(e.target.value)});
         break;
       case 'surghx' :
-        setPetProfile({...petProfile, surg_hx:e.target.value});
+        setPetProfile({...petProfile, surg_hx:stringToArray(e.target.value)});
         break;
       default :
         console.log('no changes made')
     }
   }
+
 
   return (
     <Container>

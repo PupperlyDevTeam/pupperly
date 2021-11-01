@@ -36,8 +36,9 @@ const PetProfile: NextPage = () => {
     //     vaccinations: null //must json.stringify any array values
     //   })
     // })
-
   }
+
+  //parser for arrays to covert into text
 
  
   const [petProfile, setPetProfile] = useState({

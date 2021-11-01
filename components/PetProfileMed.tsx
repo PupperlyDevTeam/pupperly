@@ -12,60 +12,33 @@ const PetProfileMed = ({isEdit, petProfile, setPetProfile}) => {
       const splitted = string.split(',')
       return [...splitted];
     }
+
+    if (!(petProfile.medications instanceof Object)) {petProfile.medications = {};}
    
     //in order to access nest objects for state, need to drill down to that level
     switch (e.target.id) {
       case 'food' :
+        //setPetProfile({...petProfile, medications: {diet: stringToArray(e.target.value)}});
         setPetProfile ((prevState:any) => {
-          if (!(prevState.medications instanceof Object)) {prevState.medications = {};}
-          //console.log('this is in setprofile', prevState.medications)
-          if (!prevState.medications.diet){
-            // console.log('this is before object creation', prevState.medications instanceof Object)
-            // prevState.medications = {};
-            // console.log('this is after object creation', prevState.medications instanceof Object)
-            prevState.medications.diet = stringToArray(e.target.value);
-          } else {
-          //console.log('this is adusted state', {...prevState})
-          prevState.medications.diet = stringToArray(e.target.value);
-          }
+          prevState.medications.diet = stringToArray(e.target.value)
           return ({...prevState})
         });
-        //setPetProfile({...petProfile, medications: {diet: stringToArray(e.target.value)}});
-        console.log(petProfile);
+        
         break;
       case 'preventative' :
         //setPetProfile({...petProfile, medications: {preventative: stringToArray(e.target.value)}});
         setPetProfile ((prevState:any) => {
-          if (!(prevState.medications instanceof Object)) {prevState.medications = {};}
-          //console.log('this is in setprofile', prevState.medications)
-          if (!prevState.medications.preventative){
-            // prevState.medications = {};
             prevState.medications.preventative = stringToArray(e.target.value);
-          } else {
-          //console.log('this is adusted state', {...prevState})
-          prevState.medications.preventative = stringToArray(e.target.value);
-          }
           return ({...prevState})
         });
-        //setPetProfile({...petProfile, medications: {diet: stringToArray(e.target.value)}});
-        console.log(petProfile);
+        
         break;
       case 'supplements' :
         //setPetProfile({...petProfile, medications: {supplements: stringToArray(e.target.value)}});
         setPetProfile ((prevState:any) => {
-          if (!(prevState.medications instanceof Object)) {prevState.medications = {};}
-          //console.log('this is in setprofile', prevState.medications)
-          if (!prevState.medications.supplements){
-            // prevState.medications = {};
             prevState.medications.supplements = stringToArray(e.target.value);
-          } else {
-          //console.log('this is adusted state', {...prevState})
-          prevState.medications.supplements = stringToArray(e.target.value);
-          }
           return ({...prevState})
         });
-        //setPetProfile({...petProfile, medications: {diet: stringToArray(e.target.value)}});
-        console.log(petProfile);
         break;
       default :
         console.log('no changes made')

@@ -19,22 +19,14 @@ const PetProfile: NextPage = () => {
   function submitButton(){
     setEdit(true)
     console.log(petProfile)
+    let data = {_id: '13035135', ...petProfile};
+    console.log('this is the data to be passed', data)
 
+    //will successfully update but unable to obtain the update information with get method
+    //need to figure out how to stringify data within before passing
     // fetch('/.netlify/functions/updatePetProfile', {
     //   method: 'POST',
-    //   body: JSON.stringify({
-    //     _id: '26236',
-    //     allergies: 'water',
-    //     breed: 'Koi',
-    //     dob: '2020-12-12',
-    //     med_hx: JSON.stringify(['debloating']),
-    //     medications: JSON.stringify(['fish zoloft']),
-    //     name: 'Goldfish',
-    //     sex: 'M',
-    //     species: 'Fish',
-    //     surg_hx: null, //must json.stringify any array values
-    //     vaccinations: null //must json.stringify any array values
-    //   })
+    //   body: JSON.stringify(data)
     // })
   }
 

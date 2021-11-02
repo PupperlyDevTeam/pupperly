@@ -6,11 +6,11 @@ import type { NextPage } from 'next'
 
 import { Container, Button, Paper } from "@mui/material"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
 
 const PetProfile: NextPage = () => {
   //onclick will change the boolean value of disabled for text field
-  const [isEdit: boolean, setEdit] = useState(true);
+  const [isEdit, setEdit] = useState(true); //isEditable, setIsEditable
 
   function editButton() {
     setEdit(false);
@@ -38,12 +38,12 @@ const PetProfile: NextPage = () => {
     breed:'',
     dob:'',
     med_hx:[],
-    medications:{diet:[], preventative:[], supplements:[]},
+    medications:['N/A','N/A','N/A'],
     name:'',
     sex:'',
     species:'',
     surg_hx:[],
-    vaccinations:{rabies:'', distemper:'', bordetella:'', lepto:'', lyme:'', flu:''},
+    vaccinations:['N/A','N/A','N/A','N/A','N/A']
   })
 
   useEffect (()=> {
@@ -57,8 +57,19 @@ const PetProfile: NextPage = () => {
     .then((res) => {
       console.log('this is the response', res)
       const {allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations} = res
-      //console.log('this is the breakdown of the information', allergies)
-      setPetProfile({allergies, breed, dob, med_hx, medications, name, sex, species, surg_hx, vaccinations})
+
+      setPetProfile({
+        allergies,
+        breed, 
+        dob, 
+        med_hx,
+        medications, 
+        name, 
+        sex, 
+        species,
+        surg_hx,
+        vaccinations
+      })
       //why is all the data returning as an string rather than an array 
       console.log('this is in state', petProfile);
     })

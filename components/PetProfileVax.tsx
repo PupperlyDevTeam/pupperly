@@ -10,14 +10,14 @@ const PetProfileVax = ({isEdit, petProfile, setPetProfile}) => {
     e.preventDefault();
 
    
-    if (!(petProfile.vaccinations instanceof Object)) {petProfile.vaccinations = {};}
+    //if (!(petProfile.vaccinations instanceof Object)) {petProfile.vaccinations = {};}
 
     //need to find an entry that has an object for items to test this code or it will fail
     switch (e.target.id) {
       case 'rabies' :
         //setPetProfile({...petProfile, vaccinations:e.target.value});
         setPetProfile ((prevState:any) => {
-          prevState.vaccinations.rabies = e.target.value
+          //prevState.vaccinations.rabies = e.target.value ? e.target.value: 'N/A';
           return ({...prevState})
         });
         break;
@@ -66,12 +66,12 @@ const PetProfileVax = ({isEdit, petProfile, setPetProfile}) => {
       <Typography>Vaccinations</Typography>
       <Typography>Please only fill in vaccinations applicable to your pet.</Typography>
         <FormControl sx={{p:2}}>
-          <Typography>Rabies</Typography><TextField disabled={isEdit} id="rabies" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.rabies} onChange={updateHx} />
-          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEdit} id="distemper" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.distemper} onChange={updateHx}/>
-          <Typography>Bordetella</Typography><TextField disabled={isEdit} id="bordetella" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.bordetella} onChange={updateHx}/>
-          <Typography>Leptospirosis</Typography><TextField disabled={isEdit} id="lepto" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.lepto} onChange={updateHx}/>
-          <Typography>Lyme</Typography><TextField disabled={isEdit} id="lyme" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.lyme} onChange={updateHx}/>
-          <Typography>Influenza</Typography><TextField disabled={isEdit} id="flu" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations.flu} onChange={updateHx}/>
+          <Typography>Rabies</Typography><TextField disabled={isEdit} id="rabies" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[0]} onChange={updateHx} />
+          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEdit} id="distemper" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[1]} onChange={updateHx}/>
+          <Typography>Bordetella</Typography><TextField disabled={isEdit} id="bordetella" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[2]} onChange={updateHx}/>
+          <Typography>Leptospirosis</Typography><TextField disabled={isEdit} id="lepto" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[3]} onChange={updateHx}/>
+          <Typography>Lyme</Typography><TextField disabled={isEdit} id="lyme" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[4]} onChange={updateHx}/>
+          <Typography>Influenza</Typography><TextField disabled={isEdit} id="flu" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[5]} onChange={updateHx}/>
         </FormControl>
     </Container>
   )

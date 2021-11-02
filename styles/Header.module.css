@@ -28,10 +28,22 @@
     display:none;
     
 }
+.navImg{
+    display:flex;
+    flex: 1;
+    align-items: center;
+    padding-bottom: 10px;
+}
   .rightNav {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 1em;
+    flex:1;
+  }
+  .leftNav {
+      display:none;
+      
   }
   .user {
     font-size: 1.5em;
@@ -41,19 +53,26 @@
     .headerLogBtn {
        display: none; 
     }
-    .container{
+    /* .container{
+        justify-content: center;
+    } */
+    .navImg{
         justify-content: center;
     }
     .rightNav {
         display: none;
+        
     }
     .mobileNav {
         display:flex;
         justify-content: flex-end;
         align-items:center;
-        width:20%;
-        
-
+        flex:0.5;
     }
+    .leftNav {
+        display:flex;
+        flex:0.5;
+    }
+   
    
 }

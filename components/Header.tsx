@@ -19,12 +19,15 @@ function Header() {
   };
   return (
     <div className={styles.container}>
-      <Image
-        src="/pupperly_web.png"
-        alt="Pupperly Logo"
-        width={275}
-        height={104}
-      />
+      {user && <div className={styles.leftNav} />}
+      <div className={styles.navImg}>
+        <Image
+          src="/pupperly_web.png"
+          alt="Pupperly Logo"
+          width={275}
+          height={104}
+        />
+      </div>
 
       {!user && (
         <div className={styles.headerLogBtn}>
@@ -35,7 +38,9 @@ function Header() {
       )}
       {user && (
         <div className={styles.rightNav}>
-          <p className={styles.user}>{user.user_metadata.full_name ?? null}</p>
+          <p className={styles.user}>
+            Welcome {user.user_metadata.full_name ?? null}
+          </p>
           <button onClick={logout} className={styles.btn}>
             Logout
           </button>
@@ -75,6 +80,7 @@ function Header() {
           </Menu>
         </div>
       )}
+      {!user && <div className={styles.loggedOutDiv} />}
     </div>
   );
 }

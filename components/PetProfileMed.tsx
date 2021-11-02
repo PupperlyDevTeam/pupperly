@@ -3,57 +3,29 @@ import { useState, useEffect } from "react"
 
 const PetProfileMed = ({isEdit, petProfile, setPetProfile}) => {
 
-  function updateHx (e) {
+  function updateHx (e:any) {
     e.preventDefault();
 
-
-    //converts the string to an array in order to pass it to database
-    function stringToArray(string) {
-      const splitted = string.split(', ')
-      return [...splitted];
-    }
-
-    //console.log(JSON.stringify(petProfile.medications[0]));
-
-    //if (!(petProfile.medications instanceof Object)) {petProfile.medications = {};}
+    const updateMedication = [...petProfile.medications]
    
-    //in order to access nest objects for state, need to drill down to that level
     switch (e.target.id) {
       case 'food' :
-        //setPetProfile({...petProfile, medications: {diet: stringToArray(e.target.value)}});
-        setPetProfile ((prevState:any) => {
-          if(!prevState.medications[0]) { prevState.medications[0] = 'N/A'
-        } else {
-          prevState.medications[0] = e.target.value;
-        }
-        // const updatedMedication = e.target.value;
-        //   return ({...prevState, medications[0]: updatedMedication})
-        });
-      
-        break;
+        updateMedication[0] = e.target.value;
+        setPetProfile({...petProfile, medications: updateMedication})
+      break;
+    
       case 'preventative' :
-        //setPetProfile({...petProfile, medications: {preventative: stringToArray(e.target.value)}});
-        setPetProfile ((prevState:any) => {
-            prevState.medications.preventative = stringToArray(e.target.value);
-          return ({...prevState})
-        });
-        
-        break;
+        updateMedication[1] = e.target.value;
+        setPetProfile({...petProfile, medications: updateMedication})
+     break;
       case 'supplements' :
-        //setPetProfile({...petProfile, medications: {supplements: stringToArray(e.target.value)}});
-        setPetProfile ((prevState:any) => {
-            prevState.medications.supplements = stringToArray(e.target.value);
-          return ({...prevState})
-        });
-        break;
+        updateMedication[2] = e.target.value;
+        setPetProfile({...petProfile, medications: updateMedication})
+    break;
       default :
         console.log('no changes made')
     }
   }
-  // const {diet, preventative, supplements} = petProfile.medications
-  // console.log('this is the destructur', diet)
-
-  //console.log(petProfile.medications)
 
   return (
     <Container>

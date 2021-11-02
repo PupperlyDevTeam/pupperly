@@ -10,51 +10,39 @@ const PetProfileVax = ({isEdit, petProfile, setPetProfile}) => {
     e.preventDefault();
 
    
+    const updatedVax = [...petProfile.vaccinations]
     //if (!(petProfile.vaccinations instanceof Object)) {petProfile.vaccinations = {};}
 
     //need to find an entry that has an object for items to test this code or it will fail
     switch (e.target.id) {
       case 'rabies' :
-        //setPetProfile({...petProfile, vaccinations:e.target.value});
-        setPetProfile ((prevState:any) => {
-          //prevState.vaccinations.rabies = e.target.value ? e.target.value: 'N/A';
-          return ({...prevState})
-        });
+        updatedVax[0] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
         break;
       case 'distemper' :
-        // setPetProfile({...petProfile, vaccinations:e.target.value});
-        setPetProfile ((prevState:any) => {
-          prevState.vaccinations.distemper = e.target.value
-          return ({...prevState})
-        });
+        updatedVax[1] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
+    
         break;
       case 'bordetella' :
-        // setPetProfile({...petProfile, vaccinations:e.target.value});
-        setPetProfile ((prevState:any) => {
-          prevState.vaccinations.bordetella = e.target.value
-          return ({...prevState})
-        });
+        updatedVax[2] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
+     
         break;
       case 'lepto' :
-        // setPetProfile({...petProfile, vaccinations:e.target.value});
-        setPetProfile ((prevState:any) => {
-          prevState.vaccinations.lepto = e.target.value
-          return ({...prevState})
-        });
+        updatedVax[3] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
+    
         break;
       case 'lyme' :
-        //setPetProfile({...petProfile, vaccinations:e.target.value});
-        setPetProfile ((prevState:any) => {
-          prevState.vaccinations.lyme = e.target.value
-          return ({...prevState})
-        });
+        updatedVax[4] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
+      
         break;
       case 'flu' :
-          // setPetProfile({...petProfile, vaccinations:e.target.value});
-          setPetProfile ((prevState:any) => {
-            prevState.vaccinations.flu = e.target.value
-            return ({...prevState})
-          });
+        updatedVax[5] = e.target.value;
+        setPetProfile({...petProfile, vaccinations: updatedVax})
+     
           break;
       default :
         console.log('no changes made')

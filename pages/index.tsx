@@ -1,11 +1,14 @@
 import type { NextPage } from 'next';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
+import Router from 'next/router';
 import styles from '../styles/Home.module.css';
 import axios from 'axios';
 import AuthContext from '../stores/authContext';
 import { style } from '@mui/system';
+// import { Router } from '@mui/icons-material';
 
 const Home: NextPage = () => {
   // fetch('.netlify/functions/testFunction')
@@ -14,6 +17,14 @@ const Home: NextPage = () => {
   const { user, login, logout, authReady } = useContext(AuthContext);
   console.log('user', user);
   const year = new Date().getFullYear();
+
+  useEffect(() => {
+    if (user && authReady) {
+      //temporary until we have a user profile page, will
+      //redirect to user profile from splash upon login
+      Router.push('/petprofile');
+    }
+  }, [user, authReady]);
 
   return (
     <div className={styles.container}>

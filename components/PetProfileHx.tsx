@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 
 const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
   //const isEdit = {isEdit}
-  function updateHx (e) {
+  function updateHx (e:any) {
     e.preventDefault();
     
     //converts the string to an array in order to pass it to database
-    function stringToArray(string) {
-      const splitted = string.split(',')
-      return [...splitted];
+    function stringToArray(string:String) {
+      const splitter = string.split(',')
+      return [...splitter];
     }
    
     switch (e.target.id) {
@@ -34,9 +34,9 @@ const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
       <Typography>Major Medical History</Typography>
       <Stack spacing={2} sx={{p:2}}>
         <FormControl>
-        <Typography>Allergies</Typography> <TextField disabled={isEdit} id="allergies" placeholder="Food, Medications , Others?" value={petProfile.allergies} onChange={updateHx}/>
-        <Typography>Illnesses</Typography> <TextField disabled={isEdit} id="medhx" placeholder="Any Major Illnesses?" value={petProfile.med_hx} onChange={updateHx} />
-        <Typography>Surgical History</Typography> <TextField disabled={isEdit} id="surghx" placeholder="Previous Surgeries" value={petProfile.surg_hx} onChange={updateHx}/>
+        <Typography>Allergies</Typography> <TextField disabled={isEditable} id="allergies" placeholder="Food, Medications , Others?" value={petProfile.allergies} onChange={updateHx}/>
+        <Typography>Illnesses</Typography> <TextField disabled={isEditable} id="medhx" placeholder="Any Major Illnesses?" value={petProfile.med_hx} onChange={updateHx} />
+        <Typography>Surgical History</Typography> <TextField disabled={isEditable} id="surghx" placeholder="Previous Surgeries" value={petProfile.surg_hx} onChange={updateHx}/>
         </FormControl>
       </Stack>
     </Container>

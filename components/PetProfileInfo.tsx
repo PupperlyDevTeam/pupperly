@@ -2,7 +2,7 @@ import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button, T
 
 const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:any) => {
 
-  function updateHx (e) {
+  function updateHx (e:any) {
     e.preventDefault();
     switch (e.target.id) {
       case 'petname' :
@@ -29,11 +29,11 @@ const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:any) => {
     <Container>
       <Avatar alt="pet picture" variant='rounded' sx={{height:150, width:150}}/>
         <Stack>
-          <Typography>Pet Name:</Typography><TextField disabled={isEdit} id="petname" variant='outlined' value={petProfile.name} onChange={updateHx}/>
-          <Typography>Date of Birth:</Typography><TextField disabled={isEdit} id="dob" variant='outlined' value={petProfile.dob} onChange={updateHx}/>
-          <Typography>Sex:</Typography><TextField disabled={isEdit} id="sex" variant='outlined' value={petProfile.sex} onChange={updateHx} />
-          <Typography>Species:</Typography><TextField disabled={isEdit} id="species" variant='outlined' value={petProfile.species} onChange={updateHx} />
-          <Typography>Breed:</Typography><TextField disabled={isEdit} id="breed" variant='outlined' value={petProfile.breed} onChange={updateHx} />
+          <Typography>Pet Name:</Typography><TextField disabled={isEditable} id="petname" variant='outlined' value={petProfile.name} onChange={updateHx}/>
+          <Typography>Date of Birth:</Typography><TextField disabled={isEditable} id="dob" variant='outlined' value={petProfile.dob} onChange={updateHx}/>
+          <Typography>Sex:</Typography><TextField disabled={isEditable} id="sex" variant='outlined' value={petProfile.sex} onChange={updateHx} />
+          <Typography>Species:</Typography><TextField disabled={isEditable} id="species" variant='outlined' value={petProfile.species} onChange={updateHx} />
+          <Typography>Breed:</Typography><TextField disabled={isEditable} id="breed" variant='outlined' value={petProfile.breed} onChange={updateHx} />
         </Stack>
     </Container>
   )

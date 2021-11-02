@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 
 const PetProfileVax = ({isEditable, petProfile, setPetProfile}:any) => {
 
-  function updateHx (e) {
+  function updateHx (e:any) {
     e.preventDefault();
 
    
@@ -54,12 +54,12 @@ const PetProfileVax = ({isEditable, petProfile, setPetProfile}:any) => {
       <Typography>Vaccinations</Typography>
       <Typography>Please only fill in vaccinations applicable to your pet.</Typography>
         <FormControl sx={{p:2}}>
-          <Typography>Rabies</Typography><TextField disabled={isEdit} id="rabies" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[0]} onChange={updateHx} />
-          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEdit} id="distemper" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[1]} onChange={updateHx}/>
-          <Typography>Bordetella</Typography><TextField disabled={isEdit} id="bordetella" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[2]} onChange={updateHx}/>
-          <Typography>Leptospirosis</Typography><TextField disabled={isEdit} id="lepto" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[3]} onChange={updateHx}/>
-          <Typography>Lyme</Typography><TextField disabled={isEdit} id="lyme" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[4]} onChange={updateHx}/>
-          <Typography>Influenza</Typography><TextField disabled={isEdit} id="flu" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[5]} onChange={updateHx}/>
+          <Typography>Rabies</Typography><TextField disabled={isEditable} id="rabies" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[0]} onChange={updateHx} />
+          <Typography>DA2PP/FVRCP</Typography><TextField disabled={isEditable} id="distemper" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[1]} onChange={updateHx}/>
+          <Typography>Bordetella</Typography><TextField disabled={isEditable} id="bordetella" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[2]} onChange={updateHx}/>
+          <Typography>Leptospirosis</Typography><TextField disabled={isEditable} id="lepto" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[3]} onChange={updateHx}/>
+          <Typography>Lyme</Typography><TextField disabled={isEditable} id="lyme" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[4]} onChange={updateHx}/>
+          <Typography>Influenza</Typography><TextField disabled={isEditable} id="flu" variant='outlined' placeholder="Date Given" value={petProfile.vaccinations[5]} onChange={updateHx}/>
         </FormControl>
     </Container>
   )

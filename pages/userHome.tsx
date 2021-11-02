@@ -1,31 +1,24 @@
-import React, { useState, useEffect } from 'react';
-//import handler from '../netlify/functions/createPetProfile'
-import Router from 'next/router';
-//import handler from '../netlify/functions/getPetProfileByOwner';
+import React, { useState, useEffect, useContext } from 'react';
+//import Router from 'next/router';
+import AuthContext from '../stores/authContext';
+import { v4 as uuidv4 } from 'uuid';
+//import Link from 'next/link';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import {
 	Box,
 	Grid,
 	Card,
-	CardMedia,
 	CardContent,
 	CssBaseline,
 	Container,
 	Input,
-	TextField,
 	Typography,
 	Button,
 	Modal,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import IconButton from '@mui/material/IconButton';
 interface Props {}
-interface petInfo {
-	petName: string;
-	gender: string;
-	species: string;
-	breed: string;
-}
 
 const style = {
 	position: 'absolute',
@@ -39,83 +32,132 @@ const style = {
 	p: 4,
 };
 const userHome = (props: Props) => {
-	const [petName, setPetName] = useState('');
+	const [petName, setPetName] = useState<string>('');
+	const [pets, setPets] = useState<[]>([]);
+	const [petId, setPetId] = useState<string>('');
+	const [ownerId, setOwnerId] = useState<string>('');
+
+	// get the user from netlify login
+	const { user } = useContext(AuthContext);
+	console.log('user:', user);
+
 	/* Modal */
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState<boolean>(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	// dummyData
-	const dummyData = [
-		{ name: 'A', species: 'Dog', breed: 'Maltese', dob: '01/01/2020' },
-		{ name: 'B', species: 'cat', breed: 'I dont know', dob: '01/01/2020' },
-		{
-			name: 'C',
-			species: 'Dog',
-			breed: 'mix',
-			dob: '01/01/2020',
-		},
-	];
+	// const dummyData = [
+	// 	{ name: 'A', species: 'Dog', breed: 'Maltese', dob: '01/01/2020' },
+	// 	{ name: 'B', species: 'cat', breed: 'I dont know', dob: '01/01/2020' },
+	// 	{
+	// 		name: 'C',
+	// 		species: 'Dog',
+	// 		breed: null,
+	// 		dob: '01/01/2020',
+	// 	},
+	// ];
 
-	// todo: fetch all user's pet info
-	// get pet profile by owner id
-	let pets: [];
+	// fetch all user's pet info
+	// todo: get pet profile by owner id
 	const getPetProfileByOwner = async () => {
-		await fetch('/.netlify/functions/getPetProfileByOwner', {
-			method: 'POST',
-			body: JSON.stringify({
-				// todo: add owner id
-				owner_id: '65465469849615',
-			}),
-		})
-			.then((res) => res.json())
-			.then((res) => {
-				console.log('res from getPetProfileByOwner: ', res);
-				pets = res;
-			})
-			.catch((err) => {
-				console.log('err from getPetProfileByOwner: ', err);
+		try {
+			const res = await fetch('/.netlify/functions/getPetProfileByOwner', {
+				method: 'POST',
+				body: JSON.stringify({
+					_eq: '103333',
+				}),
 			});
-		return pets;
-	};
-	getPetProfileByOwner();
-	// todo: useEffect render all pets basic info after retrieving it from DB
-	// ? /*  */if one of the items in data is null, render null? or not render that item?
+			//const jsonData = await res.json();
+			//console.log('jsonData: ', jsonData);
 
-	/* 	useEffect(() => {
-		getPetProfileByOwner();
-	},[]); */
+			// setPets(jsonData);
+			// console.log('pets: ', pets);
 
-	// todo: testing backend functionalities
+			// return jsonData;
+			return res;
+		} catch (error) {
+			console.log('err from getPetProfileByOwner: ', error);
+		}
+	}; // end of getPetProfileByOwner
 
-	//todo: direct to petprofile page once user click on NEXT button
+	// todo: create pet profile with pet's name
+	// todo: generate pet ID uuid
+	const createPetProfile = async (ownerID: string, petName: string) => {
+		try {
+			setPetId(uuidv4());
+			console.log('petId: ', petId);
+
+			const res = await fetch('/.netlify/functions/createPetProfile', {
+				method: 'POST',
+				body: JSON.stringify({
+					// todo: replace with ownerID
+					owner_id: '103333',
+					name: petName,
+					// ? what should I fill out for pet id?
+					_id: petId,
+				}),
+			}).then((res) => res.json());
+			console.log('res from createPetProfile: ', res);
+		} catch (error) {
+			console.log('err from createPetProfile: ', error);
+		}
+	}; // end of createPetProfile
+
+	//direct to petprofile page once user click on NEXT button
 	// ? Do we also create a pet profile for the user as well here ?
 	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
 		e.preventDefault();
 		console.log('next button clicked');
-		//direct to petprofile page
-		Router.push('/petprofile');
+		console.log('petName in handleNEXT: ', petName);
+
+		// create pet profile with pet's name
+		// createPetProfile(ownerID, petName);
+
+		//direct to petprofile page, use Link instead
+		//Router.push('/petprofile');
 	};
+
+	//todo: create link for each pet's card to direct to petprofile page with pet's ID
+
+	//useEffect render all pets basic info after retrieving it from DB
+	useEffect(() => {
+		getPetProfileByOwner()
+			.then((res) => res.json())
+			.then((res) => {
+				setPets(res);
+				console.log('res', res);
+			});
+		//setPets(getPetProfileByOwner());
+	}, []);
+
+	console.log('pets: ', pets);
 	return (
 		<div>
 			<h3>this is user's home page</h3>
 			<br />
 			<Container maxWidth='md' align='center'>
+				<br />
 				<Grid container spacing={2} direction='column' justifyContent='center'>
-					{dummyData.map((item) => (
-						<Grid item xs={8}>
-							<Card>
-								<CardContent>
-									<Typography>
-										<h3>Name: {item.name}</h3>
-										<h4>Species: {item.species}</h4>
-										<h4>Breed: {item.breed}</h4>
-										<h4>DOB: {item.dob}</h4>
-									</Typography>
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
+					{pets
+						? pets.map((item) => (
+								<Grid item xs={8}>
+									<Card>
+										<CardContent>
+											<Typography variant='h3'>Name: {item.name}</Typography>
+											<Typography variant='h4'>
+												Species: {item.species ? item.species : 'null'}
+											</Typography>
+											<Typography variant='h4'>
+												Breed: {item.breed ? item.breed : 'null'}
+											</Typography>
+											<Typography variant='h4'>
+												DOB: {item.dob ? item.dob : 'null'}
+											</Typography>
+										</CardContent>
+									</Card>
+								</Grid>
+						  ))
+						: 'wanna add your pets?'}
 				</Grid>
 				<br />
 				<Button variant='contained' endIcon={<AddIcon />} onClick={handleOpen}>
@@ -151,9 +193,14 @@ const userHome = (props: Props) => {
 									/>
 								</Box>
 							</div>
-							<Button variant='contained' onClick={(e) => handleNext(e)}>
-								NEXT
-							</Button>
+							<br />
+							<Router>
+								<Link to={{ pathname: '/petprofile', state: { pets: pets } }}>
+									<Button variant='contained' onClick={(e) => handleNext(e)}>
+										NEXT
+									</Button>
+								</Link>
+							</Router>
 						</Typography>
 					</Box>
 				</Modal>

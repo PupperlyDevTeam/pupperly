@@ -74,7 +74,7 @@ function Header() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={logout} sx={styles.menuItem}>
+            <MenuItem onClick={logout} className={styles.menuItem}>
               Logout
             </MenuItem>
           </Menu>

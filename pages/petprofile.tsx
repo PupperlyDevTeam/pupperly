@@ -1,12 +1,22 @@
+import type { NextPage } from 'next';
+import { useEffect, useContext } from 'react';
+import Router from 'next/router';
+import AuthContext from '../stores/authContext';
 import PetProfileHx from '../components/PetProfileHx';
 import PetProfileInfo from '../components/PetProfileInfo';
 import PetProfileMed from '../components/PetProfileMed';
 import PetProfileVax from '../components/PetProfileVax';
-import type { NextPage } from 'next';
 
 import { Container, Button, Paper } from '@mui/material';
 
 const PetProfile: NextPage = () => {
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    if (!user) {
+      Router.push('/');
+    }
+  }, [user]);
+
   return (
     <Container
       sx={{

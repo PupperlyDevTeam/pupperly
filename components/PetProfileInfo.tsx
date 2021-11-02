@@ -1,6 +1,6 @@
 import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField } from "@mui/material"
 
-const PetProfileInfo = ({isEdit, petProfile, setPetProfile}) => {
+const PetProfileInfo = ({isEditable, petProfile, setPetProfile}) => {
 
   function updateHx (e) {
     e.preventDefault();

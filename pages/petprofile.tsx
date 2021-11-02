@@ -10,18 +10,18 @@ import React, { useState, useEffect } from 'react';
 
 const PetProfile: NextPage = () => {
   //onclick will change the boolean value of disabled for text field
-  const [isEdit, setEdit] = useState(true); //isEditable, setIsEditable
+  const [isEditable, setEditable] = useState<boolean>(true); //isEditable, setIsEditable
 
   function editButton() {
-    setEdit(false);
+    setEditable(false);
   }
   
   function submitButton(){
-    setEdit(true)
+    setEditable(true)
     console.log(petProfile)
     let data = {_id: '13035135', ...petProfile};
     console.log('this is the data to be passed', data)
-    
+
     fetch('/.netlify/functions/updatePetProfile', {
       method: 'POST',
       body: JSON.stringify(data)
@@ -77,12 +77,12 @@ const PetProfile: NextPage = () => {
   return (
     <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
       <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
-        <PetProfileInfo isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+        <PetProfileInfo isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
       </Paper>
       <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
-        <PetProfileVax isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
-        <PetProfileMed isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
-        <PetProfileHx isEdit={isEdit} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+        <PetProfileVax isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+        <PetProfileMed isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+        <PetProfileHx isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <Button variant="contained" size="small" onClick={editButton}>Edit</Button>
         <Button variant="contained" size="small" onClick={submitButton}>Submit</Button>
       </Paper>

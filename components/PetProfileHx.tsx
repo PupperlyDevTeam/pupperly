@@ -1,7 +1,7 @@
 import { Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField, FormControl } from "@mui/material"
 import { useEffect } from 'react';
 
-const PetProfileHx = ({isEdit, petProfile, setPetProfile}) => {
+const PetProfileHx = ({isEditable, petProfile, setPetProfile}) => {
   //const isEdit = {isEdit}
   function updateHx (e) {
     e.preventDefault();

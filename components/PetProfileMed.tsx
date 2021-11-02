@@ -1,7 +1,7 @@
 import { Avatar, Card, Typography, Box, Stack, Container, Button, FormControl, TextField } from "@mui/material"
 import { useState, useEffect } from "react"
 
-const PetProfileMed = ({isEditable, petProfile, setPetProfile}) => {
+const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
 
   function updateHx (e:any) {
     e.preventDefault();

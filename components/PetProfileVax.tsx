@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 
 
 
-const PetProfileVax = ({isEditable, petProfile, setPetProfile}) => {
+const PetProfileVax = ({isEditable, petProfile, setPetProfile}:any) => {
 
   function updateHx (e) {
     e.preventDefault();

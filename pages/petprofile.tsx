@@ -8,9 +8,10 @@ import { Container, Button, Paper } from '@mui/material';
 
 import React, { useState, useEffect } from 'react';
 
+
 const PetProfile: NextPage = () => {
-  //onclick will change the boolean value of disabled for text field
-  const [isEditable, setEditable] = useState<boolean>(true); //isEditable, setIsEditable
+  //state for the boolean that is passed onto children components
+  const [isEditable, setEditable] = useState<boolean>(true); 
 
   function editButton() {
     setEditable(false);
@@ -27,9 +28,6 @@ const PetProfile: NextPage = () => {
       body: JSON.stringify(data)
     })
   }
-
-  //parser for arrays to covert into text
-
  
   const [petProfile, setPetProfile] = useState({
     allergies:[],
@@ -43,6 +41,7 @@ const PetProfile: NextPage = () => {
     surg_hx:[],
     vaccinations:['N/A','N/A','N/A','N/A','N/A']
   })
+
 
   useEffect (()=> {
     fetch('/.netlify/functions/getPetProfile', {
@@ -68,8 +67,6 @@ const PetProfile: NextPage = () => {
         surg_hx,
         vaccinations
       })
-      //why is all the data returning as an string rather than an array 
-      console.log('this is in state', petProfile);
     })
     .catch((err) => console.log('err, ', err))
   },[])

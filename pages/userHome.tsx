@@ -195,7 +195,7 @@ const userHome = (props: Props) => {
 							</div>
 							<br />
 							<Router>
-								<Link to={{ pathname: '/petprofile', state: { pets: pets } }}>
+								<Link to='/petprofile'>
 									<Button variant='contained' onClick={(e) => handleNext(e)}>
 										NEXT
 									</Button>

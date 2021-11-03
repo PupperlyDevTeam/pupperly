@@ -21,7 +21,32 @@
   border-radius: '30px';
   border: 'none';
 }
-
+.logBtn {
+  height: 50px;
+  background-color: #ffb703;
+  color: #023047;
+  padding: 10px 20px;
+  width: 200px;
+  font-size: 1.2em;
+  margin:1px;
+  font-Weight: 700;
+  border-radius: 0 30px 30px 0;
+  border-left: 1px solid #FB8500;
+  box-shadow: 8px 10px 10px 1px rgba(0,0,0,0.8);
+}
+.regBtn {
+  height: 50px;
+  background-color: #ffb703;
+  color: #023047;
+  padding: 10px 20px;
+  width: 200px;
+  margin: 1px;
+  font-size: 1.2em;
+  font-weight: 700;
+  border-radius: 30px 0 0 30px;
+  border-right: 1px solid #FB8500;
+  box-shadow: 8px 10px 10px 1px rgba(0,0,0,0.8);
+}
 
 .main {
   padding: 5rem 0;
@@ -75,8 +100,7 @@ background-position: center center;
 }
 .mobileBtn {
   display: none;
-  margin-top:20px;
-  
+width: 100%  
 }
 
 .footer { 
@@ -124,6 +148,11 @@ background-position: center center;
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
+}
+.desktopBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .code {
@@ -188,12 +217,33 @@ background-position: center center;
     width:100%;
   }
   .mobileBtn {
-    display:block
+    display:flex;
+    justify-content: space-around ;
+    align-items: center;
+    flex-direction: column;
   }
   .desktopBtn {
     display:none;
+    width: 100%;
+    margin: 10px;
   }
-  
+  .logBtn {
+    width: 90%;
+    border-radius: 30px;
+    margin: 10px;
+    border:none;
+    box-shadow: 4px 5px 5px 1px rgba(0,0,0,0.5);
+
+  }
+  .regBtn {
+    width: 90%;
+    border-radius: 30px;
+    margin:10px;
+    border:none;
+    box-shadow: 4px 5px 5px 1px rgba(0,0,0,0.5);
+
+
+  }
 
   .featureCard p {
     font-size: 1.5em;

@@ -9,7 +9,6 @@ import {
 	Grid,
 	Card,
 	CardContent,
-	CssBaseline,
 	Container,
 	Input,
 	Typography,
@@ -17,7 +16,7 @@ import {
 	Modal,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-interface Props {}
+
 interface petObj {
 	name: string;
 	species: string;
@@ -26,21 +25,9 @@ interface petObj {
 	_id: string;
 }
 
-// modal styles
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 400,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-};
-const userHome = (props: Props) => {
+const userHome = () => {
 	const [petName, setPetName] = useState<string>('');
-	const [pets, setPets] = useState<[]>([]);
+	const [pets, setPets] = useState<petObj[]>([]);
 	const [petId, setPetId] = useState<string>('');
 	//const [ownerId, setOwnerId] = useState<string>('');
 
@@ -86,7 +73,7 @@ const userHome = (props: Props) => {
 		try {
 			//setPetId(uuidv4());
 			//setPetId('12345');
-			//console.log('petId in create pet profile: ', petId);
+			console.log('petId in create pet profile: ', petId);
 
 			const res = await fetch('/.netlify/functions/createPetProfile', {
 				method: 'POST',
@@ -105,10 +92,10 @@ const userHome = (props: Props) => {
 	//direct to petprofile page once user click on NEXT button
 	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
 		e.preventDefault();
-		// console.log('next button clicked');
-		// console.log('petName in handleNEXT: ', petName);
+		//console.log('next button clicked');
+		//console.log('petName in handleNEXT: ', petName);
 
-		// ! create pet profile with pet's name
+		//  create pet profile with pet's name
 		//setPetId(uuidv4());
 		// setPetId('00000');
 		// console.log('petId: ', petId);
@@ -130,13 +117,22 @@ const userHome = (props: Props) => {
 		if (!user) {
 			Router.push('/');
 		}
-		//console.log('user in useEffect: ', user);
+		console.log('user in useEffect: ', user);
+		//await setOwnerId(user?.id);
+		//console.log('ownerId in useEffect: ', ownerId);
 
 		getPetProfileByOwner();
-
+		// .then((res) => res.json())
+		// .then((res) => {
+		//   setPets(res);
+		//   console.log('res', res);
+		// });
+		console.log('pets in useEffect: ', pets);
+		//console.log('ownerId:', ownerId);
+		//setPets(getPetProfileByOwner());
 	}, [user]);
 
-	
+	console.log('pets outside, before return: ', pets);
 	return (
 		<div>
 			<h3>this is user's home page</h3>
@@ -185,7 +181,19 @@ const userHome = (props: Props) => {
 					aria-labelledby='modal-modal-title'
 					aria-describedby='modal-modal-description'
 				>
-					<Box sx={style}>
+					<Box
+						sx={{
+							position: 'absolute',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
+							width: 400,
+							bgcolor: 'background.paper',
+							border: '2px solid #000',
+							boxShadow: 24,
+							p: 4,
+						}}
+					>
 						<Typography id='modal-modal-title' variant='h6' component='h2'>
 							modal open
 						</Typography>

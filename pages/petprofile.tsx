@@ -1,13 +1,14 @@
+import type { NextPage } from 'next';
+import React, { useState, useEffect, useContext } from 'react';
+import Router from 'next/router';
+import AuthContext from '../stores/authContext';
 import PetProfileHx from '../components/PetProfileHx';
 import PetProfileInfo from '../components/PetProfileInfo';
 import PetProfileMed from '../components/PetProfileMed';
 import PetProfileVax from '../components/PetProfileVax';
-import type { NextPage } from 'next';
 import styles from '../styles/PetProfile.module.css';
 
 import { Container, Button, Paper } from '@mui/material';
-
-import React, { useState, useEffect } from 'react';
 
 //types
 interface PetProfile {
@@ -117,6 +118,13 @@ const PetProfile: NextPage = () => {
     })
     .catch((err) => console.log('err, ', err))
   },[])
+
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    if (!user) {
+      Router.push('/');
+    }
+  }, [user]);
 
   return (
     <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-//import Router from 'next/router';
+import Router from 'next/router';
 import AuthContext from '../stores/authContext';
 import { v4 as uuidv4 } from 'uuid';
-//import Link from 'next/link';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Link from 'next/link';
+//import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import {
 	Box,
@@ -20,6 +20,7 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 interface Props {}
 
+// modal styles
 const style = {
 	position: 'absolute',
 	top: '50%',
@@ -39,32 +40,23 @@ const userHome = (props: Props) => {
 
 	// get the user from netlify login
 	const { user } = useContext(AuthContext);
-	console.log('user:', user);
+	//console.log('user:', user?.id);
+	// setOwnerId(user?.id);
+	
 
 	/* Modal */
 	const [open, setOpen] = useState<boolean>(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	// const dummyData = [
-	// 	{ name: 'A', species: 'Dog', breed: 'Maltese', dob: '01/01/2020' },
-	// 	{ name: 'B', species: 'cat', breed: 'I dont know', dob: '01/01/2020' },
-	// 	{
-	// 		name: 'C',
-	// 		species: 'Dog',
-	// 		breed: null,
-	// 		dob: '01/01/2020',
-	// 	},
-	// ];
-
 	// fetch all user's pet info
 	// todo: get pet profile by owner id
-	const getPetProfileByOwner = async () => {
+	const getPetProfileByOwner = async (ownerId) => {
 		try {
 			const res = await fetch('/.netlify/functions/getPetProfileByOwner', {
 				method: 'POST',
 				body: JSON.stringify({
-					_eq: '103333',
+					_eq: ownerId,
 				}),
 			});
 			//const jsonData = await res.json();
@@ -82,22 +74,24 @@ const userHome = (props: Props) => {
 
 	// todo: create pet profile with pet's name
 	// todo: generate pet ID uuid
-	const createPetProfile = async (ownerID: string, petName: string) => {
+	const createPetProfile = async (ownerId: string, petName: string, petId: string) => {
 		try {
-			setPetId(uuidv4());
-			console.log('petId: ', petId);
+			//setPetId(uuidv4());
+			//setPetId('12345');
+			console.log('petId in create pet profile: ', petId);
 
 			const res = await fetch('/.netlify/functions/createPetProfile', {
 				method: 'POST',
 				body: JSON.stringify({
 					// todo: replace with ownerID
-					owner_id: '103333',
+					owner_id: ownerId,
 					name: petName,
 					// ? what should I fill out for pet id?
 					_id: petId,
 				}),
 			}).then((res) => res.json());
 			console.log('res from createPetProfile: ', res);
+			//console.log('res is:')
 		} catch (error) {
 			console.log('err from createPetProfile: ', error);
 		}
@@ -105,13 +99,16 @@ const userHome = (props: Props) => {
 
 	//direct to petprofile page once user click on NEXT button
 	// ? Do we also create a pet profile for the user as well here ?
-	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
+	const handleNext = (e: React.MouseEvent<HTMLElement>, ownerId, petName, petId) => {
 		e.preventDefault();
 		console.log('next button clicked');
 		console.log('petName in handleNEXT: ', petName);
 
-		// create pet profile with pet's name
-		// createPetProfile(ownerID, petName);
+		// ! create pet profile with pet's name
+		//setPetId(uuidv4());
+		setPetId('12345');
+		console.log('petId: ', petId);
+		createPetProfile(ownerId, petName, petId);
 
 		//direct to petprofile page, use Link instead
 		//Router.push('/petprofile');
@@ -121,15 +118,27 @@ const userHome = (props: Props) => {
 
 	//useEffect render all pets basic info after retrieving it from DB
 	useEffect(() => {
-		getPetProfileByOwner()
+		if (!user) {
+			Router.push('/');
+		}
+		getPetProfileByOwner(ownerId)
 			.then((res) => res.json())
 			.then((res) => {
 				setPets(res);
 				console.log('res', res);
 			});
+			setOwnerId(user?.id);
+			//console.log('ownerId:', ownerId);
 		//setPets(getPetProfileByOwner());
-	}, []);
+	}, [user]);
 
+	/*
+	useEffect(() => {
+    if (!user) {
+      Router.push('/');
+    }
+  }, [user]);
+	*/
 	console.log('pets: ', pets);
 	return (
 		<div>
@@ -138,23 +147,30 @@ const userHome = (props: Props) => {
 			<Container maxWidth='md' align='center'>
 				<br />
 				<Grid container spacing={2} direction='column' justifyContent='center'>
-					{pets
+					{pets && pets.length
 						? pets.map((item) => (
 								<Grid item xs={8}>
-									<Card>
-										<CardContent>
-											<Typography variant='h3'>Name: {item.name}</Typography>
-											<Typography variant='h4'>
-												Species: {item.species ? item.species : 'null'}
-											</Typography>
-											<Typography variant='h4'>
-												Breed: {item.breed ? item.breed : 'null'}
-											</Typography>
-											<Typography variant='h4'>
-												DOB: {item.dob ? item.dob : 'null'}
-											</Typography>
-										</CardContent>
-									</Card>
+									<Link
+										href={{
+											pathname: '/',
+											query: { ownerId, petId: item._id ? item._id : '' },
+										}}
+									>
+										<Card>
+											<CardContent>
+												<Typography variant='h3'>Name: {item.name}</Typography>
+												<Typography variant='h4'>
+													Species: {item.species ? item.species : 'null'}
+												</Typography>
+												<Typography variant='h4'>
+													Breed: {item.breed ? item.breed : 'null'}
+												</Typography>
+												<Typography variant='h4'>
+													DOB: {item.dob ? item.dob : 'null'}
+												</Typography>
+											</CardContent>
+										</Card>
+									</Link>
 								</Grid>
 						  ))
 						: 'wanna add your pets?'}
@@ -194,13 +210,15 @@ const userHome = (props: Props) => {
 								</Box>
 							</div>
 							<br />
-							<Router>
-								<Link to='/petprofile'>
-									<Button variant='contained' onClick={(e) => handleNext(e)}>
-										NEXT
-									</Button>
+							{/* <Router> */}
+
+							<Button variant='contained' onClick={(e) => handleNext(e, ownerId, petName, petId)}>
+								<Link href={{ pathname: '/petprofile', query: { ownerId: ownerId, petId: petId } }}>
+									NEXT
 								</Link>
-							</Router>
+							</Button>
+
+							{/* </Router> */}
 						</Typography>
 					</Box>
 				</Modal>

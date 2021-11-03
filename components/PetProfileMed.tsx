@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
 
-  function updateHx (e:any) {
+  function updateHx (e:React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
 
     const updateMedication = [...petProfile.medications]

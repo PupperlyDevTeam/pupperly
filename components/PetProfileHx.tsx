@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
   //const isEdit = {isEdit}
-  function updateHx (e:any) {
+  function updateHx (e:React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     
     //converts the string to an array in order to pass it to database

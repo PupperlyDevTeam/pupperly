@@ -3,6 +3,7 @@ import PetProfileInfo from '../components/PetProfileInfo';
 import PetProfileMed from '../components/PetProfileMed';
 import PetProfileVax from '../components/PetProfileVax';
 import type { NextPage } from 'next';
+import styles from '../styles/PetProfile.module.css';
 
 import { Container, Button, Paper } from '@mui/material';
 
@@ -33,34 +34,46 @@ const PetProfile: NextPage = () => {
   function submitButton(){
     setEditable(true)
     console.log(petProfile)
-    //let data = {_id: '13035135', ...petProfile};
+    let data = {_id: '13035135', ...petProfile};
     
 
-    const allergyStringified = JSON.stringify(petProfile.allergies);
-    const med_hxStrigified = JSON.stringify(petProfile.med_hx);
-    const medicationsStringified = JSON.stringify(petProfile.medications);
-    const surg_hxStringified = JSON.stringify(petProfile.surg_hx);
-    const vaxStringified = JSON.stringify(petProfile.vaccinations);
+    // const allergyStringified = JSON.stringify(petProfile.allergies);
+    // const med_hxStrigified = JSON.stringify(petProfile.med_hx);
+    // const medicationsStringified = JSON.stringify(petProfile.medications);
+    // const surg_hxStringified = JSON.stringify(petProfile.surg_hx);
+    // const vaxStringified = JSON.stringify(petProfile.vaccinations);
 
-    const data = {
-      _id: '13035135',
-      allergies: allergyStringified,
-      breed: petProfile.breed, 
-      dob: petProfile.dob, 
-      med_hx: med_hxStrigified,
-      medications: medicationsStringified, 
-      name: petProfile.name, 
-      sex: petProfile.sex, 
-      species: petProfile.species,
-      surg_hx: surg_hxStringified,
-      vaccinations: vaxStringified
-    }
+    // const data = {
+    //   _id: '13035135',
+    //   allergies: allergyStringified,
+    //   breed: petProfile.breed, 
+    //   dob: petProfile.dob, 
+    //   med_hx: med_hxStrigified,
+    //   medications: medicationsStringified, 
+    //   name: petProfile.name, 
+    //   sex: petProfile.sex, 
+    //   species: petProfile.species,
+    //   surg_hx: surg_hxStringified,
+    //   vaccinations: vaxStringified
+    // }
 
     console.log('this is the data to be passed', data)
 
     fetch('/.netlify/functions/updatePetProfile', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        _id: "13035135",
+        allergies: "{'new fake allergy', 'test allergy'}",
+        breed: "Beagle",
+        dob: "2021-10-04",
+        med_hx: "{'test', 'test'}",
+        medications: "{'cat Zoloft', 'cat Xanax'}",
+        name: "Spot",
+        sex: "M",
+        species: "Cat",
+        surg_hx:"{'test', 'test'}",
+        vaccinations:"{'test', 'test'}"
+      })
     })
   }
  
@@ -106,16 +119,16 @@ const PetProfile: NextPage = () => {
   },[])
 
   return (
-    <Container sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
-      <Paper sx={{gridColumn:'1', gridRow:'span 3'}}>
+    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
+      <Paper className={styles.infoScreen} sx={{gridColumn:'1', gridRow:'span 3'}}>
         <PetProfileInfo isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
       </Paper>
-      <Paper sx={{gridColumn:'2', gridRow:'1/4'}}>
+      <Paper className={styles.questionScreen} sx={{gridColumn:'2', gridRow:'1/4'}}>
         <PetProfileVax isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <PetProfileMed isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
         <PetProfileHx isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
-        <Button variant="contained" size="small" onClick={editButton}>Edit</Button>
-        <Button variant="contained" size="small" onClick={submitButton}>Submit</Button>
+        <Button className={styles.btn} variant="contained" size="small" onClick={editButton}>Edit</Button>
+        <Button className={styles.btn} variant="contained" size="small" onClick={submitButton}>Submit</Button>
       </Paper>
       <Button
         onClick={() =>

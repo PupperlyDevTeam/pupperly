@@ -42,7 +42,6 @@ const userHome = (props: Props) => {
 	const { user } = useContext(AuthContext);
 	//console.log('user:', user?.id);
 	// setOwnerId(user?.id);
-	
 
 	/* Modal */
 	const [open, setOpen] = useState<boolean>(false);
@@ -74,7 +73,11 @@ const userHome = (props: Props) => {
 
 	// todo: create pet profile with pet's name
 	// todo: generate pet ID uuid
-	const createPetProfile = async (ownerId: string, petName: string, petId: string) => {
+	const createPetProfile = async (
+		ownerId: string,
+		petName: string,
+		petId: string
+	) => {
 		try {
 			//setPetId(uuidv4());
 			//setPetId('12345');
@@ -99,19 +102,25 @@ const userHome = (props: Props) => {
 
 	//direct to petprofile page once user click on NEXT button
 	// ? Do we also create a pet profile for the user as well here ?
-	const handleNext = (e: React.MouseEvent<HTMLElement>, ownerId, petName, petId) => {
+	const handleNext = async(
+		e: React.MouseEvent<HTMLElement>,
+		ownerId,
+		petName,
+		petId
+	) => {
 		e.preventDefault();
 		console.log('next button clicked');
 		console.log('petName in handleNEXT: ', petName);
 
 		// ! create pet profile with pet's name
-		//setPetId(uuidv4());
+		//setPetId(`${Math.random()}`);
 		setPetId('12345');
-		console.log('petId: ', petId);
-		createPetProfile(ownerId, petName, petId);
+		//console.log('petId in handleNext: ', petId);
+		await createPetProfile(ownerId, petName, petId);
 
 		//direct to petprofile page, use Link instead
 		//Router.push('/petprofile');
+		await Router.push({pathname: '/petprofile', query: {ownerId,petId: petId}});
 	};
 
 	//todo: create link for each pet's card to direct to petprofile page with pet's ID
@@ -127,19 +136,11 @@ const userHome = (props: Props) => {
 				setPets(res);
 				console.log('res', res);
 			});
-			setOwnerId(user?.id);
-			//console.log('ownerId:', ownerId);
+		setOwnerId(user?.id);
+		//console.log('ownerId:', ownerId);
 		//setPets(getPetProfileByOwner());
-	}, [user]);
+	}, []);
 
-	/*
-	useEffect(() => {
-    if (!user) {
-      Router.push('/');
-    }
-  }, [user]);
-	*/
-	console.log('pets: ', pets);
 	return (
 		<div>
 			<h3>this is user's home page</h3>
@@ -212,10 +213,18 @@ const userHome = (props: Props) => {
 							<br />
 							{/* <Router> */}
 
-							<Button variant='contained' onClick={(e) => handleNext(e, ownerId, petName, petId)}>
-								<Link href={{ pathname: '/petprofile', query: { ownerId: ownerId, petId: petId } }}>
+							<Button
+								variant='contained'
+								onClick={(e) => {handleNext(e, ownerId, petName, petId)}}
+							>
+								{/* <Link
+									href={{
+										pathname: '/petprofile',
+										query: { ownerId: ownerId, petId: petId },
+									}}
+								> */}
 									NEXT
-								</Link>
+								{/* </Link> */}
 							</Button>
 
 							{/* </Router> */}

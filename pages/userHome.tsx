@@ -46,7 +46,7 @@ const userHome = (props: Props) => {
 
 	// get the user from netlify login
 	const { user } = useContext(AuthContext);
-	console.log('user in the beginning:', user);
+	//console.log('user in the beginning:', user);
 	//setOwnerId(user?.id);
 
 	/* Modal */
@@ -68,10 +68,10 @@ const userHome = (props: Props) => {
 				}),
 			});
 			const jsonData = await res.json();
-			console.log('jsonData: ', jsonData);
+			//console.log('jsonData: ', jsonData);
 
 			setPets(jsonData);
-			console.log('pets in get pets: ', pets);
+			//console.log('pets in get pets: ', pets);
 
 			// return jsonData;
 			return res;
@@ -86,7 +86,7 @@ const userHome = (props: Props) => {
 		try {
 			//setPetId(uuidv4());
 			//setPetId('12345');
-			console.log('petId in create pet profile: ', petId);
+			//console.log('petId in create pet profile: ', petId);
 
 			const res = await fetch('/.netlify/functions/createPetProfile', {
 				method: 'POST',
@@ -105,8 +105,8 @@ const userHome = (props: Props) => {
 	//direct to petprofile page once user click on NEXT button
 	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
 		e.preventDefault();
-		console.log('next button clicked');
-		console.log('petName in handleNEXT: ', petName);
+		// console.log('next button clicked');
+		// console.log('petName in handleNEXT: ', petName);
 
 		// ! create pet profile with pet's name
 		//setPetId(uuidv4());
@@ -130,22 +130,13 @@ const userHome = (props: Props) => {
 		if (!user) {
 			Router.push('/');
 		}
-		console.log('user in useEffect: ', user);
-		//await setOwnerId(user?.id);
-		//console.log('ownerId in useEffect: ', ownerId);
+		//console.log('user in useEffect: ', user);
 
 		getPetProfileByOwner();
-		// .then((res) => res.json())
-		// .then((res) => {
-		//   setPets(res);
-		//   console.log('res', res);
-		// });
-		console.log('pets in useEffect: ', pets);
-		//console.log('ownerId:', ownerId);
-		//setPets(getPetProfileByOwner());
+
 	}, [user]);
 
-	console.log('pets outside, before return: ', pets);
+	
 	return (
 		<div>
 			<h3>this is user's home page</h3>

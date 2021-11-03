@@ -1,7 +1,13 @@
 import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField } from "@mui/material"
 import React from "react";
 
-const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:any) => {
+interface IProps {
+  isEditable: boolean;
+  petProfile: any;
+  setPetProfile: any;
+}
+
+const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:IProps) => {
 
   function updateHx (e:React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();

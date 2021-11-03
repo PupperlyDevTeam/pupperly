@@ -9,6 +9,19 @@ import { Container, Button, Paper } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 
+interface PetProfile {
+  allergies: any;
+  breed: string;
+  dob: string;
+  med_hx: any;
+  medications: any;
+  name: string;
+  sex: string;
+  species:string;
+  surg_hx: any;
+  vaccinations: any;
+}
+
 const PetProfile: NextPage = () => {
   //state for the boolean that is passed onto children components
   const [isEditable, setEditable] = useState<boolean>(true); 
@@ -29,7 +42,7 @@ const PetProfile: NextPage = () => {
     })
   }
  
-  const [petProfile, setPetProfile] = useState({
+  const [petProfile, setPetProfile] = useState<PetProfile>({
     allergies:[],
     breed:'',
     dob:'',

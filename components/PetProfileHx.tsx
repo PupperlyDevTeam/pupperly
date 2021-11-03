@@ -1,8 +1,8 @@
-import { Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField, FormControl } from "@mui/material"
-import { useEffect } from 'react';
+import { Typography, Stack, Container, TextField, FormControl } from "@mui/material"
+
 
 const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
-  //const isEdit = {isEdit}
+
   function updateHx (e:React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
     
@@ -15,15 +15,17 @@ const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
     switch (e.target.id) {
       case 'medhx' :
         setPetProfile({...petProfile, med_hx:stringToArray(e.target.value)});
-        //console.log(petProfile.med_hx)
         break;
-      case 'allergies' :
+      
+        case 'allergies' :
         setPetProfile({...petProfile, allergies:stringToArray(e.target.value)});
         break;
-      case 'surghx' :
+      
+        case 'surghx' :
         setPetProfile({...petProfile, surg_hx:stringToArray(e.target.value)});
         break;
-      default :
+      
+        default :
         console.log('no changes made')
     }
   }

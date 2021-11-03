@@ -1,4 +1,4 @@
-import { Avatar, Card, Typography, Box, Stack, Container, Grid, Paper, Button, TextField } from "@mui/material"
+import { Avatar, Typography, Stack, Container, TextField } from "@mui/material"
 import React from "react";
 
 interface IProps {
@@ -15,18 +15,23 @@ const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:IProps) => {
       case 'petname' :
         setPetProfile({...petProfile, name:e.target.value});
         break;
+      
       case 'dob' :
         setPetProfile({...petProfile, dob:e.target.value});
         break;
+      
       case 'sex' :
         setPetProfile({...petProfile, sex:e.target.value});
         break;
+      
       case 'species' :
         setPetProfile({...petProfile, species:e.target.value});
         break;
+      
       case 'breed' :
         setPetProfile({...petProfile, breed:e.target.value});
         break;
+        
       default :
         console.log('no changes made')
     }

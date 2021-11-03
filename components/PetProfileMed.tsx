@@ -1,5 +1,5 @@
-import { Avatar, Card, Typography, Box, Stack, Container, Button, FormControl, TextField } from "@mui/material"
-import { useState, useEffect } from "react"
+import { Typography,Stack, Container, FormControl, TextField } from "@mui/material"
+
 
 const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
 
@@ -12,16 +12,18 @@ const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
       case 'food' :
         updateMedication[0] = e.target.value;
         setPetProfile({...petProfile, medications: updateMedication})
-      break;
+        break;
     
       case 'preventative' :
         updateMedication[1] = e.target.value;
         setPetProfile({...petProfile, medications: updateMedication})
-     break;
-      case 'supplements' :
+        break;
+      
+     case 'supplements' :
         updateMedication[2] = e.target.value;
         setPetProfile({...petProfile, medications: updateMedication})
-    break;
+        break;
+      
       default :
         console.log('no changes made')
     }

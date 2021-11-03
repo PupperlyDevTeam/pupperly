@@ -1,17 +1,12 @@
 //this component need to conditionally render based on species.
-import { Avatar, Card, Typography, Box, Stack, Container, Button, TextField, FormControl } from "@mui/material"
-import { useState, useEffect } from "react"
-
-
+import { Typography, Container, TextField, FormControl } from "@mui/material"
 
 const PetProfileVax = ({isEditable, petProfile, setPetProfile}:any) => {
 
   function updateHx (e:React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-
    
     const updatedVax = [...petProfile.vaccinations]
-    //if (!(petProfile.vaccinations instanceof Object)) {petProfile.vaccinations = {};}
 
     //need to find an entry that has an object for items to test this code or it will fail
     switch (e.target.id) {
@@ -19,31 +14,32 @@ const PetProfileVax = ({isEditable, petProfile, setPetProfile}:any) => {
         updatedVax[0] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
         break;
+
       case 'distemper' :
         updatedVax[1] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
-    
         break;
+
       case 'bordetella' :
         updatedVax[2] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
-     
         break;
+
       case 'lepto' :
         updatedVax[3] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
-    
         break;
+
       case 'lyme' :
         updatedVax[4] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
-      
         break;
+
       case 'flu' :
         updatedVax[5] = e.target.value;
         setPetProfile({...petProfile, vaccinations: updatedVax})
-     
-          break;
+        break;
+        
       default :
         console.log('no changes made')
     }

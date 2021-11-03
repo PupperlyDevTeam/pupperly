@@ -8,7 +8,7 @@ import { Container, Button, Paper } from '@mui/material';
 
 import React, { useState, useEffect } from 'react';
 
-
+//types
 interface PetProfile {
   allergies: any;
   breed: string;
@@ -23,7 +23,7 @@ interface PetProfile {
 }
 
 const PetProfile: NextPage = () => {
-  //state for the boolean that is passed onto children components
+  //state for the boolean that is passed onto children components in order to turn on and off the disabled function
   const [isEditable, setEditable] = useState<boolean>(true); 
 
   function editButton() {
@@ -33,7 +33,29 @@ const PetProfile: NextPage = () => {
   function submitButton(){
     setEditable(true)
     console.log(petProfile)
-    let data = {_id: '13035135', ...petProfile};
+    //let data = {_id: '13035135', ...petProfile};
+    
+
+    const allergyStringified = JSON.stringify(petProfile.allergies);
+    const med_hxStrigified = JSON.stringify(petProfile.med_hx);
+    const medicationsStringified = JSON.stringify(petProfile.medications);
+    const surg_hxStringified = JSON.stringify(petProfile.surg_hx);
+    const vaxStringified = JSON.stringify(petProfile.vaccinations);
+
+    const data = {
+      _id: '13035135',
+      allergies: allergyStringified,
+      breed: petProfile.breed, 
+      dob: petProfile.dob, 
+      med_hx: med_hxStrigified,
+      medications: medicationsStringified, 
+      name: petProfile.name, 
+      sex: petProfile.sex, 
+      species: petProfile.species,
+      surg_hx: surg_hxStringified,
+      vaccinations: vaxStringified
+    }
+
     console.log('this is the data to be passed', data)
 
     fetch('/.netlify/functions/updatePetProfile', {
@@ -54,7 +76,6 @@ const PetProfile: NextPage = () => {
     surg_hx:[],
     vaccinations:['N/A','N/A','N/A','N/A','N/A']
   })
-
 
   useEffect (()=> {
     fetch('/.netlify/functions/getPetProfile', {

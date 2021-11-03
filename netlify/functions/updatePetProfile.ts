@@ -25,7 +25,7 @@ exports.handler = async (event: HandlerEvent) => {
   
   let body = {
     query: `
-    mutation updatePetProfile($_id: String!, $allergies: String!, $breed: String!, $med_hx: String!, $medications: String!, $name: String!, $sex: String!, $species: String!, $surg_hx: String!, $vaccinations: String!, $dob: date!) {
+    mutation updatePetProfile($_id: String!, $allergies: _text!, $breed: String!, $med_hx: _text!, $medications: _text!, $name: String!, $sex: String!, $species: String!, $surg_hx: _text!, $vaccinations: _text!, $dob: date!) {
       update_pet_profile_by_pk(pk_columns: {_id: $_id}, _set: {allergies: $allergies, breed: $breed, dob: $dob, med_hx: $med_hx, medications: $medications, sex: $sex, species: $species, surg_hx: $surg_hx, name: $name, vaccinations: $vaccinations, _id: $_id}) {
         _id
       }

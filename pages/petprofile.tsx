@@ -6,6 +6,7 @@ import PetProfileHx from '../components/PetProfileHx';
 import PetProfileInfo from '../components/PetProfileInfo';
 import PetProfileMed from '../components/PetProfileMed';
 import PetProfileVax from '../components/PetProfileVax';
+import styles from '../styles/PetProfile.module.css';
 import { useRouter } from 'next/router';
 
 import { Container, Button, Paper } from '@mui/material';
@@ -28,55 +29,50 @@ const PetProfile: NextPage = () => {
 	//state for the boolean that is passed onto children components in order to turn on and off the disabled function
 	const [isEditable, setEditable] = useState<boolean>(true);
 
-	function editButton() {
-		setEditable(false);
-	}
+  function editButton() {
+    setEditable(false);
+  }
+  
+  function submitButton(){
+    setEditable(true)
+  
+    const allergyStringified = `{${petProfile.allergies}}`;
+    const med_hxStrigified = `{${petProfile.med_hx}}`;
+    const medicationsStringified = `{${petProfile.medications}}`;
+    const surg_hxStringified = `{${petProfile.surg_hx}}`;
+    const vaxStringified = `{${petProfile.vaccinations}}`;
 
-	function submitButton() {
-		setEditable(true);
-		console.log(petProfile);
-		//let data = {_id: '13035135', ...petProfile};
-
-		const allergyStringified = JSON.stringify(petProfile.allergies);
-		const med_hxStrigified = JSON.stringify(petProfile.med_hx);
-		const medicationsStringified = JSON.stringify(petProfile.medications);
-		const surg_hxStringified = JSON.stringify(petProfile.surg_hx);
-		const vaxStringified = JSON.stringify(petProfile.vaccinations);
-
-		const data = {
-			_id: '13035135',
-			allergies: allergyStringified,
-			breed: petProfile.breed,
-			dob: petProfile.dob,
-			med_hx: med_hxStrigified,
-			medications: medicationsStringified,
-			name: petProfile.name,
-			sex: petProfile.sex,
-			species: petProfile.species,
-			surg_hx: surg_hxStringified,
-			vaccinations: vaxStringified,
-		};
-
-		console.log('this is the data to be passed', data);
-
-		fetch('/.netlify/functions/updatePetProfile', {
-			method: 'POST',
-			body: JSON.stringify(data),
-		});
-	}
-
-	const [petProfile, setPetProfile] = useState<PetProfile>({
-		allergies: [],
-		breed: '',
-		dob: '',
-		med_hx: [],
-		medications: ['N/A', 'N/A', 'N/A'],
-		name: '',
-		sex: '',
-		species: '',
-		surg_hx: [],
-		vaccinations: ['N/A', 'N/A', 'N/A', 'N/A', 'N/A'],
-	});
+    const data = {
+      allergies: allergyStringified,
+      breed: petProfile.breed, 
+      dob: petProfile.dob, 
+      med_hx: med_hxStrigified,
+      medications: medicationsStringified, 
+      name: petProfile.name, 
+      sex: petProfile.sex, 
+      species: petProfile.species,
+      surg_hx: surg_hxStringified,
+      vaccinations: vaxStringified
+    }
+    //change hard coded _id to the actual petiD 
+    fetch('/.netlify/functions/updatePetProfile', {
+      method: 'POST',
+      body: JSON.stringify({_id: "13035135", ...data})
+    })
+  }
+ 
+  const [petProfile, setPetProfile] = useState<PetProfile>({
+    allergies:[],
+    breed:'',
+    dob:'',
+    med_hx:[],
+    medications:['N/A','N/A','N/A'],
+    name:'',
+    sex:'',
+    species:'',
+    surg_hx:[],
+    vaccinations:['N/A','N/A','N/A','N/A','N/A']
+  })
 
 	useEffect(() => {
 		fetch('/.netlify/functions/getPetProfile', {
@@ -127,44 +123,17 @@ const PetProfile: NextPage = () => {
 	}, [user]);
 
 	return (
-		<Container
-			sx={{
-				display: 'grid',
-				gridAutoFlow: 'row',
-				gridTemplateColumns: '1fr 1fr',
-				gridTemplateRows: '1fr 1fr 1fr',
-			}}
-		>
-			<Paper sx={{ gridColumn: '1', gridRow: 'span 3' }}>
-				<PetProfileInfo
-					isEditable={isEditable}
-					petProfile={petProfile}
-					setPetProfile={setPetProfile}
-				/>
-			</Paper>
-			<Paper sx={{ gridColumn: '2', gridRow: '1/4' }}>
-				<PetProfileVax
-					isEditable={isEditable}
-					petProfile={petProfile}
-					setPetProfile={setPetProfile}
-				/>
-				<PetProfileMed
-					isEditable={isEditable}
-					petProfile={petProfile}
-					setPetProfile={setPetProfile}
-				/>
-				<PetProfileHx
-					isEditable={isEditable}
-					petProfile={petProfile}
-					setPetProfile={setPetProfile}
-				/>
-				<Button variant='contained' size='small' onClick={editButton}>
-					Edit
-				</Button>
-				<Button variant='contained' size='small' onClick={submitButton}>
-					Submit
-				</Button>
-			</Paper>
+    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
+    <Paper className={styles.infoScreen} sx={{gridColumn:'1', gridRow:'span 3'}}>
+      <PetProfileInfo isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+    </Paper>
+    <Paper className={styles.questionScreen} sx={{gridColumn:'2', gridRow:'1/4'}}>
+      <PetProfileVax isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+      <PetProfileMed isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+      <PetProfileHx isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
+      <Button className={styles.btn} variant="contained" size="small" onClick={editButton}>Edit</Button>
+      <Button className={styles.btn} variant="contained" size="small" onClick={submitButton}>Submit</Button>
+    </Paper>
 			<Button
 				onClick={() =>
 					fetch('/.netlify/functions/createPetProfile', {

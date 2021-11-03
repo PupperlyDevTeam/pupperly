@@ -15,7 +15,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-background-color: #8ecae6;
+  background-color: #8ecae6;
 }
 
 a {
@@ -27,4 +27,8 @@ a {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.MuiTextField-root {
+  font-family: var(--font-body);
 }

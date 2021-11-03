@@ -48,14 +48,12 @@
   .user {
     font-size: 1.5em;
   }
-@media (max-width:  420px){
+@media (max-width:  600px){
 
     .headerLogBtn {
        display: none; 
     }
-    /* .container{
-        justify-content: center;
-    } */
+ 
     .navImg{
         justify-content: center;
     }

@@ -113,17 +113,17 @@ const PetProfile: NextPage = () => {
 			.catch((err) => console.log('err, ', err));
 	}, []);
 
-	const { user } = useContext(AuthContext);
-	const router = useRouter();
-	useEffect(() => {
-		if (!user) {
-			Router.push('/');
-		}
-		console.log('router info: ', router.query);
-	}, [user]);
+	// const { user } = useContext(AuthContext);
+	// const router = useRouter();
+	// useEffect(() => {
+	// 	if (!user) {
+	// 		Router.push('/');
+	// 	}
+	// 	console.log('router info: ', router.query);
+	// }, [user]);
 
 	return (
-    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
+    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr', p:3}}>
     <Paper className={styles.infoScreen} sx={{gridColumn:'1', gridRow:'span 3'}}>
       <PetProfileInfo isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
     </Paper>

@@ -31,7 +31,7 @@ const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
 
   return (
     <Container>
-      <Typography>Medications</Typography>
+      <Typography sx={{fontSize: 'h5.fontSize', fontWeight:'bold'}}>Medications</Typography>
       <Stack spacing={2} sx={{p:2}}>
         <FormControl>
         <Typography>Diet:</Typography> <TextField disabled={isEditable} id="food" placeholder="What does your pet eat?" value={petProfile.medications[0]} onChange={updateHx}/>

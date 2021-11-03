@@ -1,6 +1,5 @@
 .container {
-  background-color: var(--color-light);
-  font-family: var(--font-body);
+  /* background-color: var(--color-light); */
 }
 
 .btn {
@@ -18,8 +17,25 @@
   font-family: var(--font-body);
   display: flex;
   align-items: center;
+  background-color: var(--color-light);
+  color: var(--color-dark);
 }
 
 .questionScreen {
   font-family: var(--font-body);
+  color: var(--color-dark);
+  background-color: var(--color-teal);
+}
+
+.avatar{
+  display: flex;
+  align-items: center;
+}
+
+.headerSection {
+
+}
+
+.labelInputBox {
+
 }

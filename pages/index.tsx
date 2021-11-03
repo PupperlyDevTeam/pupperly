@@ -2,26 +2,20 @@ import type { NextPage } from 'next';
 import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import Router from 'next/router';
 import styles from '../styles/Home.module.css';
-import axios from 'axios';
 import AuthContext from '../stores/authContext';
-import { style } from '@mui/system';
-// import { Router } from '@mui/icons-material';
 import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-	// fetch('.netlify/functions/testFunction')
-	// .then((res) => res.json())
-	// .then((res) => console.log(res.data))
+
 	const { user, login, logout, authReady } = useContext(AuthContext);
-	console.log('user', user);
+	//console.log('user', user);
 	const year = new Date().getFullYear();
 
 	const router = useRouter();
 	useEffect(() => {
-		console.log('router info: ', router.query);
+		//console.log('router info: ', router.query);
 		if (user && authReady) {
 			//temporary until we have a user profile page, will
 			//redirect to user profile from splash upon login

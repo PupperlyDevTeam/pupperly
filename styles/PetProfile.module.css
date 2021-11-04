@@ -24,7 +24,7 @@
 .questionScreen {
   font-family: var(--font-body);
   color: var(--color-dark);
-  background-color: var(--color-teal);
+  background-color: var(--color-light);
 }
 
 .avatar{

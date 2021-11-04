@@ -34,9 +34,9 @@ const PetProfileMed = ({isEditable, petProfile, setPetProfile}:any) => {
       <Typography sx={{fontSize: 'h5.fontSize', fontWeight:'bold'}}>Medications</Typography>
       <Stack spacing={2} sx={{p:2}}>
         <FormControl>
-        <Typography>Diet:</Typography> <TextField disabled={isEditable} id="food" placeholder="What does your pet eat?" value={petProfile.medications[0]} onChange={updateHx}/>
-        <Typography>Preventatives:</Typography> <TextField disabled={isEditable} id="preventative" placeholder="Flea/Tick/Heartworm Products" value={petProfile.medications[1]} onChange={updateHx}/>
-        <Typography>Vitamins/Supplements:</Typography> <TextField disabled={isEditable} id="supplements"placeholder="Anything else?" value={petProfile.medications[2]} onChange={updateHx}/>
+        <Typography>Diet:</Typography> <TextField disabled={isEditable} id="food" placeholder="What does your pet eat?" value={petProfile.medications ? petProfile.medications[0] : ''} onChange={updateHx}/>
+        <Typography>Preventatives:</Typography> <TextField disabled={isEditable} id="preventative" placeholder="Flea/Tick/Heartworm Products" value={petProfile.medications ? petProfile.medications[1] : ''} onChange={updateHx}/>
+        <Typography>Vitamins/Supplements:</Typography> <TextField disabled={isEditable} id="supplements"placeholder="Anything else?" value={petProfile.medications ? petProfile.medications[2] : ''} onChange={updateHx}/>
         </FormControl>
       </Stack>
     </Container>

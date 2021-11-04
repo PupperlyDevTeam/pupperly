@@ -33,7 +33,7 @@ const PetProfileHx = ({isEditable, petProfile, setPetProfile}:any) => {
 
   return (
     <Container>
-      <Typography>Major Medical History</Typography>
+      <Typography sx={{fontSize: 'h5.fontSize', fontWeight:'bold'}}>Major Medical History</Typography>
       <Stack spacing={2} sx={{p:2}}>
         <FormControl>
         <Typography>Allergies</Typography> <TextField disabled={isEditable} id="allergies" placeholder="Food, Medications , Others?" value={petProfile.allergies} onChange={updateHx}/>

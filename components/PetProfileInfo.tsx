@@ -1,5 +1,6 @@
 import { Avatar, Typography, Stack, Container, TextField } from "@mui/material"
 import React from "react";
+import styles from '../styles/PetProfile.module.css';
 
 interface IProps {
   isEditable: boolean;
@@ -31,7 +32,7 @@ const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:IProps) => {
       case 'breed' :
         setPetProfile({...petProfile, breed:e.target.value});
         break;
-        
+
       default :
         console.log('no changes made')
     }
@@ -39,7 +40,7 @@ const PetProfileInfo = ({isEditable, petProfile, setPetProfile}:IProps) => {
 
   return (
     <Container>
-      <Avatar alt="pet picture" variant='rounded' sx={{height:150, width:150}}/>
+      <Avatar className={styles.avatar} alt="pet picture" variant='rounded' sx={{height:150, width:150}}/>
         <Stack>
           <Typography>Pet Name:</Typography><TextField disabled={isEditable} id="petname" variant='outlined' value={petProfile.name} onChange={updateHx}/>
           <Typography>Date of Birth:</Typography><TextField disabled={isEditable} id="dob" variant='outlined' value={petProfile.dob} onChange={updateHx}/>

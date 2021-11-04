@@ -191,7 +191,7 @@ const userHome = () => {
                   </Card>
                 </Grid>
               ))
-            : 'wanna add your pets?'}
+            : 'Add pets using button below?'}
         </Grid>
         <br />
         <Button variant="contained" endIcon={<AddIcon />} onClick={handleOpen}>
@@ -217,7 +217,7 @@ const userHome = () => {
             }}
           >
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              modal open
+              What's your pet's name?
             </Typography>
             <br />
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>

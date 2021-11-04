@@ -57,7 +57,7 @@ const PetProfile: NextPage = () => {
     //change hard coded _id to the actual petiD 
     fetch('/.netlify/functions/updatePetProfile', {
       method: 'POST',
-      body: JSON.stringify({_id: "13035135", ...data})
+      body: JSON.stringify({_id: router.query.petId, ...data})
     })
   }
  
@@ -71,14 +71,14 @@ const PetProfile: NextPage = () => {
     sex:'',
     species:'',
     surg_hx:[],
-    vaccinations:['N/A','N/A','N/A','N/A','N/A']
+    vaccinations:['N/A','N/A','N/A','N/A','N/A','N/A']
   })
 
 	useEffect(() => {
 		fetch('/.netlify/functions/getPetProfile', {
 			method: 'POST',
 			body: JSON.stringify({
-				_id: '13035135',
+				_id: router.query.petId,
 			}),
 		})
 			.then((res) => res.json())
@@ -123,7 +123,7 @@ const PetProfile: NextPage = () => {
 	}, [user]);
 
 	return (
-    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr'}}>
+    <Container className={styles.container} sx={{display: 'grid', gridAutoFlow: 'row', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr 1fr', p:3}}>
     <Paper className={styles.infoScreen} sx={{gridColumn:'1', gridRow:'span 3'}}>
       <PetProfileInfo isEditable={isEditable} petProfile={petProfile} setPetProfile = {setPetProfile}/>
     </Paper>
@@ -134,7 +134,7 @@ const PetProfile: NextPage = () => {
       <Button className={styles.btn} variant="contained" size="small" onClick={editButton}>Edit</Button>
       <Button className={styles.btn} variant="contained" size="small" onClick={submitButton}>Submit</Button>
     </Paper>
-			<Button
+			{/* <Button
 				onClick={() =>
 					fetch('/.netlify/functions/createPetProfile', {
 						method: 'POST',
@@ -220,7 +220,7 @@ const PetProfile: NextPage = () => {
 				}
 			>
 				Update Pet Profile
-			</Button>
+			</Button> */}
 		</Container>
 	);
 };

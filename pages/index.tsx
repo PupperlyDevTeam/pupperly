@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const router = useRouter();
   useEffect(() => {
     console.log('router info: ', router.query);
-    if (user) {
+    if (user && authReady) {
       //temporary until we have a user profile page, will
       //redirect to user profile from splash upon login
       Router.push('/userHome');

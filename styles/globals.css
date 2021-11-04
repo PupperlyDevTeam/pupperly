@@ -1,9 +1,20 @@
+:root {
+--color-dark: #023047;
+--color-light: #8ecae6;
+--color-orange: #FB8500;
+--color-yellow: #FFB703;
+--color-teal: #219EBC;
+
+--font-header:'Sue Ellen Francisco', cursive;
+--font-body: 'Quicksand', sans-serif;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-light);
 }
 
 a {
@@ -13,4 +24,11 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.MuiTextField-root {
+  font-family: var(--font-body);
+  border: 1px solid;
 }

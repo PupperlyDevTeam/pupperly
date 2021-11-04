@@ -1,0 +1,41 @@
+.container {
+  /* background-color: var(--color-light); */
+}
+
+.btn {
+  height:'50px';
+  background-color:var(--color-yellow);
+  color: var(--color-dark);
+  padding: '10px 20px';
+  font-size: '1.2em';
+  font-weight: '700';
+  border-radius: '30px';
+  border: 'none';
+}
+
+.infoScreen {
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+.questionScreen {
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+.avatar{
+  display: flex;
+  align-items: center;
+}
+
+.headerSection {
+
+}
+
+.labelInputBox {
+
+}

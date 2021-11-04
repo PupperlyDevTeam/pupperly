@@ -4,7 +4,10 @@
   border-radius: 30px;
 	border: none;
   justify-content: center;
-  width: 600px;
+  min-width: 300px;
+  width: 400px;
+  box-shadow: 6px 8px 8px 1px rgba(48, 48, 48, 0.5);
+
 }
 
 .stack {
@@ -13,7 +16,10 @@
 }
 
 .container {
-  text-align: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
   align-items: center;
   padding: 0;
   margin-bottom: 20px;

@@ -7,6 +7,21 @@
     font-weight: 700;
     border-radius: 30px;
     border: none;
+    box-shadow: 4px 5px 5px 1px rgba(48, 48, 48, 0.5);
+
+  }
+  .logoutBtn {
+    height: 50px;
+    background-color: transparent;
+    color: #023047;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 4px 5px 5px 1px rgba(48, 48, 48, 0.5);
+    outline: 3px solid #ffb703;
+    color:#ffb703;
   }
   .container {
     display: flex;

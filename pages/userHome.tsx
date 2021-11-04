@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Router from 'next/router';
 import AuthContext from '../stores/authContext';
-import Link from 'next/link';
-//import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 import {
 	Box,
 	Grid,
 	Card,
 	CardContent,
 	Container,
+	CssBaseline,
 	Input,
 	Typography,
 	Button,
 	Modal,
+	Stack,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import styles from '../styles/User.module.css';
+import { style } from '@mui/system';
 
 interface petObj {
 	name: string;
@@ -33,8 +34,6 @@ const userHome = () => {
 
 	// get the user from netlify login
 	const { user } = useContext(AuthContext);
-	//console.log('user in the beginning:', user);
-	//setOwnerId(user?.id);
 
 	/* Modal */
 	const [open, setOpen] = useState<boolean>(false);
@@ -44,8 +43,7 @@ const userHome = () => {
 	};
 	const handleClose = () => setOpen(false);
 
-	// fetch all user's pet info
-	// todo: get pet profile by owner id
+	//get pet profile by owner id
 	const getPetProfileByOwner = async () => {
 		try {
 			const res = await fetch('/.netlify/functions/getPetProfileByOwner', {
@@ -55,10 +53,8 @@ const userHome = () => {
 				}),
 			});
 			const jsonData = await res.json();
-			//console.log('jsonData: ', jsonData);
 
 			setPets(jsonData);
-			//console.log('pets in get pets: ', pets);
 
 			// return jsonData;
 			return res;
@@ -71,10 +67,6 @@ const userHome = () => {
 	// todo: generate pet ID uuid
 	const createPetProfile = async () => {
 		try {
-			//setPetId(uuidv4());
-			//setPetId('12345');
-			console.log('petId in create pet profile: ', petId);
-
 			const res = await fetch('/.netlify/functions/createPetProfile', {
 				method: 'POST',
 				body: JSON.stringify({
@@ -92,13 +84,7 @@ const userHome = () => {
 	//direct to petprofile page once user click on NEXT button
 	const handleNext = (e: React.MouseEvent<HTMLElement>) => {
 		e.preventDefault();
-		//console.log('next button clicked');
-		//console.log('petName in handleNEXT: ', petName);
 
-		//  create pet profile with pet's name
-		//setPetId(uuidv4());
-		// setPetId('00000');
-		// console.log('petId: ', petId);
 		createPetProfile();
 
 		//direct to petprofile page, use Link instead
@@ -108,65 +94,95 @@ const userHome = () => {
 		});
 	};
 
-	//todo: create link for each pet's card to direct to petprofile page with pet's ID
+	// todo: handle delete pet
+	const handleDelete = (id: string) => {
+		//e.preventDefault();
+		console.log('delete button clicked');
+		//get pet id from pets (item._id)
+		fetch('/.netlify/functions/deletePetProfile', {
+			method: 'POST',
+			body: JSON.stringify({
+				_id: id,
+			}),
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				console.log('res in handleDelete: ', res);
+				// setPets(res);
+				// console.log('pets in handleDelete: ', pets);
+			})
+			.catch((err) => console.log('err, ', err));
+		// console.log(`in handleDelete: pet ${id} deleted`);
 
-	//useEffect render all pets basic info after retrieving it from DB
-	//const { user } = useContext(AuthContext);
+		// * reload current page after delete
+		// another way is to setPets with data get back, and pass pets to useEffect, which somehow constantly re-render, too much rendering overload the server
+		location.reload();
+	};
+
+	// todo: handle pet details: direct to petprofile page
+	const handleDetail = (id: string) => {
+		//e.preventDefault();
+
+		Router.push({
+			pathname: '/petprofile',
+			query: { ownerId: user?.id, petId: id },
+		});
+	}; //end of handleDetail
+
 	useEffect(() => {
 		user;
 		if (!user) {
 			Router.push('/');
 		}
-		console.log('user in useEffect: ', user);
-		//await setOwnerId(user?.id);
-		//console.log('ownerId in useEffect: ', ownerId);
 
 		getPetProfileByOwner();
-		// .then((res) => res.json())
-		// .then((res) => {
-		//   setPets(res);
-		//   console.log('res', res);
-		// });
-		console.log('pets in useEffect: ', pets);
-		//console.log('ownerId:', ownerId);
-		//setPets(getPetProfileByOwner());
 	}, [user]);
 
-	console.log('pets outside, before return: ', pets);
 	return (
 		<div>
-			<h3>this is user's home page</h3>
 			<br />
-			<Container maxWidth='md'>
+			<CssBaseline />
+			<Container maxWidth='md' className={styles.container}>
 				<br />
-				<Grid container spacing={2} direction='column' justifyContent='center'>
+				<Grid container spacing={4} justifyContent='center' direction='column'>
 					{pets && pets.length
 						? pets.map((item) => (
-								<Grid item xs={8}>
-									<Link
-										href={{
-											pathname: '/petprofile',
-											query: {
-												ownerId: user?.id,
-												petId: item._id ? item._id : '',
-											},
-										}}
-									>
-										<Card>
-											<CardContent>
-												<Typography variant='h3'>Name: {item.name}</Typography>
-												<Typography variant='h4'>
-													Species: {item.species ? item.species : 'null'}
-												</Typography>
-												<Typography variant='h4'>
-													Breed: {item.breed ? item.breed : 'null'}
-												</Typography>
-												<Typography variant='h4'>
-													DOB: {item.dob ? item.dob : 'null'}
-												</Typography>
-											</CardContent>
-										</Card>
-									</Link>
+								<Grid item xs={12} sm={6} md={4}>
+									<Card className={styles.card}>
+										<CardContent>
+											<Typography variant='h4'>Name: {item.name}</Typography>
+											<Typography variant='h5'>
+												Species: {item.species ? item.species : 'null'}
+											</Typography>
+											<Typography variant='h5'>
+												Breed: {item.breed ? item.breed : 'null'}
+											</Typography>
+											<Typography variant='h5'>
+												DOB: {item.dob ? item.dob : 'null'}
+											</Typography>
+										</CardContent>
+										<Stack
+											spacing={2}
+											direction='row'
+											justifyContent='center'
+											className={styles.stack}
+										>
+											<Button
+												variant='outlined'
+												color='primary'
+												onClick={() => handleDetail(item._id ? item._id : '')}
+											>
+												Details
+											</Button>
+											<Button
+												variant='outlined'
+												color='secondary'
+												onClick={() => handleDelete(item._id ? item._id : '')}
+											>
+												Delete
+											</Button>
+										</Stack>
+									</Card>
 								</Grid>
 						  ))
 						: 'wanna add your pets?'}
